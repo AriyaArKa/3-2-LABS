@@ -1,0 +1,35 @@
+# Flex generated files
+lex.yy.c
+lex.yy.h
+
+# Compiled executables
+*.exe
+*.o
+*.out
+01_hello
+02_numbers_words
+03_signed_integers
+04_definitions
+05_c_lexer
+
+# Build directories
+build/
+dist/
+*.dSYM/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+.env
+*.log
+
+# Test output
+*.txt.out
+test_output/
