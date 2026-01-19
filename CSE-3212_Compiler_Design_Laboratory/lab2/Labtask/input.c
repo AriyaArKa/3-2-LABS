@@ -1,0 +1,27 @@
+#include<stdio.h>
+int main()
+{
+int a=10;
+
+while(a>2)
+{
+printf("before for in while")
+}
+
+printf("out of for loop");
+for(i=0;i<8;i++)
+{
+
+while(i<4)
+{
+do
+printf("nothing in while do");
+done
+}
+
+printf("in For out of while do done");
+
+}
+
+return 0;
+}

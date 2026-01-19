@@ -1,0 +1,13 @@
+for(i=0;i<8;i++)
+{
+//while(condition) 
+do
+----ignore
+---ignore
+done
+}
+
+take input uing yyin
+
+
+

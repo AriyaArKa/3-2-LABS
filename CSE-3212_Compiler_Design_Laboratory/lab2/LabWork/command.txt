@@ -1,0 +1,4 @@
+flex lab2.l
+gcc lex.yy.c -o test
+test
+gcc lex.yy.c -o test.exe 2>&1; ./test.exe; type out.txt

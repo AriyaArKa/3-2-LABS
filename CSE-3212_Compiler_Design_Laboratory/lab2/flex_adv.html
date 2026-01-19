@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Design Lab: Advanced FLEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            /* Pure White Theme */
+            --bg-color: #ffffff;      
+            --slide-bg: #ffffff;      
+            --text-primary: #000000;  
+            --text-secondary: #333333;
+            --accent: #7c3aed;        /* Violet for "Advanced" feel */
+            --accent-glow: #7c3aed20;
+            --code-bg: #1e1e1e;       
+            --success: #059669;       
+            --info: #2563eb; 
+            --warning: #d97706;         
+            --border: #e5e5e5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- SLIDE CONTAINER --- */
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: var(--slide-bg);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px 80px;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+            z-index: 10;
+        }
+
+        .slide.exit {
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 { font-size: 5rem; font-weight: 800; color: var(--text-primary); margin-bottom: 20px; letter-spacing: -2px; line-height: 1.1; }
+        h2 { font-size: 3.5rem; color: var(--accent); margin-bottom: 30px; border-left: 8px solid var(--text-primary); padding-left: 30px; }
+        p, li { font-size: 1.6rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 20px; }
+        strong { color: var(--text-primary); font-weight: 700; }
+        
+        code { 
+            font-family: 'Fira Code', monospace; 
+            background: #f3f4f6; 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            color: var(--accent); 
+            border: 1px solid #e5e7eb;
+            font-weight: bold;
+        }
+
+        /* --- CODE BLOCKS --- */
+        .code-window {
+            background: var(--code-bg);
+            border-radius: 12px;
+            border: 1px solid #333;
+            font-family: 'Fira Code', monospace;
+            margin: 20px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 55vh; 
+        }
+
+        .window-header {
+            background: #2d3748;
+            padding: 12px 20px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid #1a202c;
+            flex-shrink: 0;
+        }
+        .dot { width: 14px; height: 14px; border-radius: 50%; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+        .code-content {
+            padding: 25px;
+            color: #d8dee9;
+            font-size: 1.3rem; 
+            line-height: 1.5;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .c-kw { color: #c678dd; } 
+        .c-fn { color: #61afef; } 
+        .c-str { color: #98c379; } 
+        .c-com { color: #5c6370; font-style: italic; } 
+        .c-def { color: #e5c07b; } 
+        .c-state { color: #d19a66; font-weight: bold; }
+
+        /* --- DIAGRAMS --- */
+        .state-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+        .state-circle {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            background: #f5f3ff;
+            color: var(--accent);
+            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .state-circle.active {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+        .arrow-right {
+            font-size: 4rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- CONTROLS --- */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            display: flex;
+            gap: 20px;
+            z-index: 20;
+        }
+        .btn {
+            background: white;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            padding: 15px 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .btn:hover { 
+            background: var(--accent); 
+            border-color: var(--accent); 
+            color: white; 
+            transform: scale(1.1); 
+        }
+        
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 6px;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* --- INTERACTIVE SIMULATION --- */
+        .sim-box {
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .sim-input {
+            width: 100%;
+            padding: 20px;
+            font-family: 'Fira Code';
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            background: white;
+        }
+        .state-indicator {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            background: #e2e8f0;
+            color: #475569;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        .state-indicator.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        /* --- COMPARISON TABLE --- */
+        .comp-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            margin-top: 20px;
+        }
+        .comp-table th {
+            text-align: left;
+            padding: 15px;
+            font-size: 1.6rem;
+            color: var(--accent);
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .comp-table td {
+            padding: 20px;
+            font-size: 1.4rem;
+            background: #f8fafc;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .comp-table td:first-child {
+            border-left: 1px solid #e5e7eb;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+        .comp-table td:last-child {
+            border-right: 1px solid #e5e7eb;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 5px;
+        }
+        .tag-green { background: #dcfce7; color: #15803d; }
+        .tag-blue { background: #dbeafe; color: #1e40af; }
+
+        /* Two column layout helper */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+                <div style="font-family: 'Fira Code'; color: var(--accent); margin-bottom: 20px; font-size: 1.6rem; font-weight: bold;">CSE 3212: COMPILER DESIGN LAB</div>
+                <h1>Advanced Flex & Tools</h1>
+                <p style="font-size: 2.2rem; max-width: 900px; color: var(--text-primary);">Start Conditions, Definitions, and Alternatives.</p>
+                <p style="margin-top: 20px; font-size: 2rem;">Taking lexical analysis to the next level.</p>
+                
+                <div style="margin-top: 60px; display: flex; gap: 40px;">
+                    <div style="padding: 20px 30px; background: #f3f4f6; border-radius: 12px; font-weight: 600; font-size: 1.5rem; border: 1px solid #e5e7eb;">
+                        <i class="fa-solid fa-code-branch" style="color: var(--accent);"></i> Start Conditions
+                    </div>
+                    <div style="padding: 20px 30px; background: #f3f4f6; border-radius: 12px; font-weight: 600; font-size: 1.5rem; border: 1px solid #e5e7eb;">
+                        <i class="fa-solid fa-layer-group" style="color: var(--info);"></i> Definitions
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Regular Definitions -->
+        <div class="slide">
+            <h2>Regular Definitions</h2>
+            <p>Instead of writing complex regex repeatedly, define them once at the top.</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-top: 20px;">
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">without_defs.l</span></div>
+                    <div class="code-content">
+<span class="c-def">%%</span>
+[0-9]+        { printf("Int"); }
+[0-9]+\.[0-9]+ { printf("Float"); }
+[a-zA-Z][a-zA-Z0-9]* { echo; }</div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">with_defs.l</span></div>
+                    <div class="code-content">
+<span class="c-def">DIGIT    [0-9]</span>
+<span class="c-def">LETTER   [a-zA-Z]</span>
+
+<span class="c-def">%%</span>
+{DIGIT}+           { printf("Int"); }
+{DIGIT}+\.{DIGIT}+ { printf("Float"); }
+{LETTER}({LETTER}|{DIGIT})* { echo; }</div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.4rem; background: #e0f2fe; padding: 15px; border-radius: 8px; display: inline-block; color: var(--info);"><strong>Benefit:</strong> Improves readability and maintainability. Note the usage of <code>{braces}</code>.</p>
+        </div>
+
+        <!-- Slide 3: Start Conditions (Concept) -->
+        <div class="slide">
+            <h2>Start Conditions (States)</h2>
+            <p>Sometimes, how you tokenize depends on <strong>context</strong> (e.g., inside a comment vs. inside code).</p>
+            <p>Flex allows you to define <strong>Exclusive States</strong> using <code>%x STATE_NAME</code>.</p>
+            
+            <div class="state-diagram">
+                <div class="state-circle active">
+                    INITIAL<br>
+                    <span style="font-size: 1rem; font-weight: normal; margin-top:10px;">(Normal Code)</span>
+                </div>
+                <div class="arrow-right"><i class="fa-solid fa-arrow-right-long"></i></div>
+                <div class="state-circle" style="border-color: var(--info); color: var(--info); background: #eff6ff;">
+                    COMMENT<br>
+                    <span style="font-size: 1rem; font-weight: normal; margin-top:10px;">(Ignore Rules)</span>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 1.6rem;">
+                Use <code>BEGIN(STATE_NAME)</code> to switch states.
+            </p>
+        </div>
+
+        <!-- Slide 4: Start Conditions (Code) -->
+        <div class="slide">
+            <h2>Handling C-Style Comments</h2>
+            <p>Using states to ignore everything between <code>/*</code> and <code>*/</code>.</p>
+
+            <div class="code-window">
+                <div class="window-header"><span style="color:#888">comments.l</span></div>
+                <div class="code-content">
+<span class="c-def">%x COMMENT_STATE</span>
+
+<span class="c-def">%%</span>
+
+"/*"         { <span class="c-state">BEGIN(COMMENT_STATE);</span> }
+
+<span class="c-state">&lt;COMMENT_STATE&gt;</span>"*/" { <span class="c-state">BEGIN(INITIAL);</span> }
+<span class="c-state">&lt;COMMENT_STATE&gt;</span>\n   { /* track lines if needed */ }
+<span class="c-state">&lt;COMMENT_STATE&gt;</span>.    { /* ignore content */ }
+
+[a-zA-Z]+    { printf("Code: %s", yytext); }
+
+<span class="c-def">%%</span></div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Interactive State Demo -->
+        <div class="slide">
+            <h2>Interactive State Machine</h2>
+            <p>Type <code>int x = /* hello */ 5;</code> to see the state switch in action.</p>
+
+            <div class="sim-box">
+                <input type="text" id="stateInput" class="sim-input" placeholder="Type here..." onkeyup="updateStateSim()">
+                
+                <div style="display: flex; gap: 30px; align-items: center; margin-bottom: 30px; justify-content: center;">
+                    <div id="statusInitial" class="state-indicator active">INITIAL STATE</div>
+                    <i class="fa-solid fa-arrow-right" style="color: #cbd5e0; font-size: 1.5rem;"></i>
+                    <div id="statusComment" class="state-indicator">COMMENT STATE</div>
+                </div>
+
+                <div id="logOutput" style="font-family: 'Fira Code'; color: var(--text-secondary); font-size: 1.6rem; text-align: center;">
+                    Waiting for input...
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: yylineno -->
+        <div class="slide">
+            <h2>Advanced Variable: yylineno</h2>
+            <p>Automatically tracks the line number of the input file. Eliminates the need to manually increment a counter on <code>\n</code>.</p>
+            
+            <div class="two-col">
+                <div>
+                    <ul style="margin-top:20px;">
+                        <li><strong>Usage:</strong> Enable via <code>%option yylineno</code>.</li>
+                        <li><strong>Type:</strong> Global Integer (<code>int</code>).</li>
+                        <li><strong>Benefit:</strong> Essential for error reporting (e.g., "Syntax error on line 42").</li>
+                    </ul>
+                </div>
+                
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">line_counter.l</span></div>
+                    <div class="code-content">
+<span class="c-def">%option yylineno</span>
+
+<span class="c-def">%%</span>
+
+<span class="c-str">"error"</span>   { 
+    printf(<span class="c-str">"Error found on line %d\n"</span>, 
+            yylineno); 
+}
+
+<span class="c-def">%%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: yyin -->
+        <div class="slide">
+            <h2>Advanced Variable: yyin</h2>
+            <p>The file pointer that Flex reads from.</p>
+            
+            <div class="two-col">
+                <div>
+                    <ul style="margin-top:20px;">
+                        <li><strong>Type:</strong> <code>FILE*</code></li>
+                        <li><strong>Default:</strong> <code>stdin</code> (Keyboard input)</li>
+                        <li><strong>Usage:</strong> Assign it in the <code>main()</code> function to read from a specific file instead of the terminal.</li>
+                    </ul>
+                </div>
+                
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">file_read.c</span></div>
+                    <div class="code-content">
+<span class="c-kw">int</span> main(<span class="c-kw">int</span> argc, <span class="c-kw">char</span> **argv) {
+    <span class="c-com">// Open file provided in CLI args</span>
+    FILE *fp = fopen(argv[1], <span class="c-str">"r"</span>);
+    
+    <span class="c-kw">if</span> (fp) {
+        <span class="c-fn">yyin</span> = fp; <span class="c-com">// Point Flex to file</span>
+    }
+    
+    yylex();
+    <span class="c-kw">return</span> 0;
+}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: yyout -->
+        <div class="slide">
+            <h2>Advanced Variable: yyout</h2>
+            <p>The file pointer where Flex writes default output (e.g., ECHO).</p>
+            
+            <div class="two-col">
+                <div>
+                    <ul style="margin-top:20px;">
+                        <li><strong>Type:</strong> <code>FILE*</code></li>
+                        <li><strong>Default:</strong> <code>stdout</code> (Terminal screen)</li>
+                        <li><strong>Usage:</strong> Redirect output to a log file or report file.</li>
+                    </ul>
+                </div>
+                
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">file_write.c</span></div>
+                    <div class="code-content">
+<span class="c-kw">int</span> main() {
+    <span class="c-com">// Direct output to a file</span>
+    <span class="c-fn">yyout</span> = fopen(<span class="c-str">"output.txt"</span>, <span class="c-str">"w"</span>);
+    
+    yylex();
+    
+    <span class="c-com">// Any ECHO or output from rules</span>
+    <span class="c-com">// goes to output.txt</span>
+    <span class="c-kw">return</span> 0;
+}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: input() -->
+        <div class="slide">
+            <h2>Advanced Function: input()</h2>
+            <p>Reads the next character from the input stream, bypassing the regex engine.</p>
+            
+            <div class="two-col">
+                <div>
+                    <ul style="margin-top:20px;">
+                        <li><strong>Returns:</strong> The next character (char) or 0/EOF.</li>
+                        <li><strong>Use Case:</strong> Handling complex structures like nested comments where Regex struggles, or skipping data manually.</li>
+                    </ul>
+                </div>
+                
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">eat_comment.l</span></div>
+                    <div class="code-content">
+<span class="c-str">"/*"</span>    {
+    <span class="c-kw">char</span> c;
+    <span class="c-com">// Manually consume until */</span>
+    <span class="c-kw">while</span> ((c = <span class="c-fn">input()</span>) != 0) {
+        <span class="c-kw">if</span> (c == <span class="c-str">'*'</span>) {
+            <span class="c-kw">if</span> ((c = <span class="c-fn">input()</span>) == <span class="c-str">'/'</span>)
+                <span class="c-kw">break</span>; <span class="c-com">// End of comment</span>
+        }
+    }
+}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: yyterminate() -->
+        <div class="slide">
+            <h2>Advanced Function: yyterminate()</h2>
+            <p>Immediately stops the scanner.</p>
+            
+            <div class="two-col">
+                <div>
+                    <ul style="margin-top:20px;">
+                        <li><strong>Behavior:</strong> Acts like a <code>return 0</code> inside the <code>yylex()</code> function.</li>
+                        <li><strong>Result:</strong> <code>yylex()</code> finishes execution and returns control to <code>main()</code>.</li>
+                        <li><strong>Use Case:</strong> Logical End-Of-File or critical error stop.</li>
+                    </ul>
+                </div>
+                
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">stop_scan.l</span></div>
+                    <div class="code-content">
+<span class="c-def">%%</span>
+
+<span class="c-str">"STOP"</span>      { 
+    printf(<span class="c-str">"Stopping scanner now.\n"</span>);
+    <span class="c-fn">yyterminate()</span>; 
+}
+
+[a-z]+      { ECHO; }
+
+<span class="c-def">%%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: ECHO -->
+        <div class="slide">
+            <h2>Macro: ECHO</h2>
+            <p>A simple macro that copies the matched text (<code>yytext</code>) directly to the output (<code>yyout</code>).</p>
+
+            <div class="two-col">
+                <div>
+                    <p>It is effectively:</p>
+                    <code style="display:block; margin: 15px 0; padding:15px; font-size: 1.3rem;">fprintf(yyout, "%s", yytext);</code>
+                    <p><strong>Use Case:</strong> When you want to preserve specific text in the output while transforming or removing other parts.</p>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">echo_example.l</span></div>
+                    <div class="code-content">
+<span class="c-def">%%</span>
+
+<span class="c-str">"remove_me"</span>   { /* Do nothing, deletes text */ }
+
+.             { <span class="c-fn">ECHO</span>; /* Print everything else */ }
+
+<span class="c-def">%%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: REJECT -->
+        <div class="slide">
+            <h2>Macro: REJECT</h2>
+            <p>Instructs Flex to "undo" the current match and look for the <em>next best</em> rule that matches the same input.</p>
+
+            <div class="two-col">
+                <div>
+                    <ul style="margin-top:20px;">
+                        <li><strong>Behavior:</strong> Executes the current action, reset the scanner pointer, and proceeds to the next match.</li>
+                        <li><strong>Use Case:</strong> Counting overlapping patterns.</li>
+                        <li style="color: var(--warning);"><strong>Warning:</strong> Can significantly slow down the scanner.</li>
+                    </ul>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-header"><span style="color:#888">overlap.l</span></div>
+                    <div class="code-content">
+<span class="c-def">%%</span>
+
+<span class="c-str">"she"</span>   { she_count++; <span class="c-kw">REJECT</span>; }
+<span class="c-str">"he"</span>    { he_count++;  <span class="c-kw">REJECT</span>; }
+.       ; 
+
+<span class="c-com">/* Input "she" triggers BOTH rules! */</span>
+<span class="c-def">%%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Flex vs Industry Standards -->
+        <div class="slide">
+            <h2>Flex vs. Industry Standards</h2>
+            <p>Comparing Flex to modern tools like ANTLR.</p>
+            
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Flex (Legacy/C)</th>
+                        <th>ANTLR (Modern/Java)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primary Goal</strong></td>
+                        <td>Lexing Only (Needs Bison)</td>
+                        <td>Lexing + Parsing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td><span class="tag tag-green">HIGH</span> C-level speed</td>
+                        <td><span class="tag tag-blue">GOOD</span> Depends on runtime</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ease of Use</strong></td>
+                        <td>Steep (Manual Integration)</td>
+                        <td><span class="tag tag-green">HIGH</span> IDE Support, Vis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Use Case</strong></td>
+                        <td>System Tools, OS, Embedded</td>
+                        <td>DSLs, App Configs, IDEs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 14: Lab Task -->
+        <div class="slide">
+            <h2>Today's Advanced Task</h2>
+            <div style="background: #fff; border: 2px solid var(--accent); padding: 40px; border-radius: 16px; margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 25px; color: var(--accent); font-size: 2.2rem;">Problem Statement:</h3>
+                <p style="font-size: 1.8rem; color: var(--text-primary);">Write a Flex program that takes a C source file and:</p>
+                <ol style="margin-left: 50px; color: var(--text-primary); margin-bottom: 30px;">
+                    <li><strong>Removes</strong> all comments (both <code>//</code> and <code>/* ... */</code>).</li>
+                    <li><strong>Appends</strong> line numbers to non-empty lines.</li>
+                    <li>Prints the cleaned code to stdout.</li>
+                </ol>
+                <p style="font-size: 1.5rem; color: var(--info); background: #e0f2fe; padding: 15px; border-radius: 8px; display: inline-block;"><strong>Hint:</strong> Use Start Conditions for multi-line comments.</p>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="controls">
+            <button class="btn" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="btn" onclick="nextSlide()"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div class="progress-bar" id="progressBar"></div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'exit');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i < index) {
+                    slide.classList.add('exit');
+                }
+            });
+            
+            // Update Progress
+            const progress = ((index + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Keyboard Nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize
+        showSlide(0);
+
+        // --- STATE SIMULATION LOGIC ---
+        function updateStateSim() {
+            const input = document.getElementById('stateInput').value;
+            const log = document.getElementById('logOutput');
+            const stInit = document.getElementById('statusInitial');
+            const stComm = document.getElementById('statusComment');
+
+            // Simple logic simulation
+            let inComment = false;
+            
+            // Basic scanner loop logic simulation for the input string
+            for(let i=0; i<input.length; i++) {
+                if(!inComment) {
+                    if(input[i] === '/' && input[i+1] === '*') {
+                        inComment = true;
+                        i++; // skip *
+                    }
+                } else {
+                    if(input[i] === '*' && input[i+1] === '/') {
+                        inComment = false;
+                        i++; // skip /
+                    }
+                }
+            }
+
+            if(inComment) {
+                stInit.classList.remove('active');
+                stComm.classList.add('active');
+                log.innerHTML = "<i class='fa-solid fa-eye-slash'></i> Ignoring text (Comment Mode)...";
+                log.style.color = "var(--text-secondary)";
+            } else {
+                stComm.classList.remove('active');
+                stInit.classList.add('active');
+                log.innerHTML = "<i class='fa-solid fa-code'></i> Processing tokens (Code Mode)...";
+                log.style.color = "var(--success)";
+            }
+        }
+    </script>
+</body>
+</html>
