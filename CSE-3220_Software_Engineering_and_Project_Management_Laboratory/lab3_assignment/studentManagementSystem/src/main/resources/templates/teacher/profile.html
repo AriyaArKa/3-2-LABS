@@ -1,131 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Profile - Student Management System</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
     <nav class="navbar">
-        <a th:href="@{/dashboard}" class="navbar-brand">🎓 Student Management System</a>
-        <ul class="navbar-nav">
-            <li><a th:href="@{/dashboard}">Dashboard</a></li>
-            <li><a th:href="@{/students}">Students</a></li>
-            <li><a th:href="@{/teachers}">Teachers</a></li>
-            <li><a th:href="@{/courses}">Courses</a></li>
-            <li><a th:href="@{/departments}">Departments</a></li>
-            <li><a th:href="@{/teachers/profile}" class="active">My Profile</a></li>
-            <li>
-                <form th:action="@{/logout}" method="post" style="display: inline;">
-                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
-                </form>
-            </li>
-        </ul>
+      <a th:href="@{/dashboard}" class="navbar-brand"
+        ><i class="bi bi-mortarboard-fill"></i> Student Management</a
+      >
+      <ul class="navbar-nav">
+        <li><a th:href="@{/dashboard}"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li><a th:href="@{/students}"><i class="bi bi-people"></i> Students</a></li>
+        <li><a th:href="@{/teachers}"><i class="bi bi-person-workspace"></i> Teachers</a></li>
+        <li><a th:href="@{/courses}"><i class="bi bi-journal-text"></i> Courses</a></li>
+        <li><a th:href="@{/departments}"><i class="bi bi-building"></i> Departments</a></li>
+        <li><a th:href="@{/teachers/profile}" class="active"><i class="bi bi-person-circle"></i> My Profile</a></li>
+        <li>
+          <form th:action="@{/logout}" method="post" style="display: inline">
+            <button type="submit" class="btn btn-sm btn-danger">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+          </form>
+        </li>
+      </ul>
     </nav>
 
     <div class="container">
-        <div class="page-header">
-            <h2>👤 My Profile</h2>
-        </div>
-        
-        <!-- Success/Error Messages -->
-        <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
-        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
-        
-        <div class="row">
-            <div class="col-half">
-                <div class="card">
-                    <div class="profile-header">
-                        <div class="profile-avatar" th:text="${#strings.substring(teacher.firstName, 0, 1) + #strings.substring(teacher.lastName, 0, 1)}">JS</div>
-                        <h2 th:text="${teacher.fullName}">John Smith</h2>
-                        <p th:text="${teacher.designation != null ? teacher.designation : 'Teacher'}">Professor</p>
-                    </div>
-                    <div class="profile-info">
-                        <div class="info-row">
-                            <span class="info-label">Email:</span>
-                            <span class="info-value" th:text="${teacher.email}">john@example.com</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Phone:</span>
-                            <span class="info-value" th:text="${teacher.phone != null ? teacher.phone : 'N/A'}">123-456-7890</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Qualification:</span>
-                            <span class="info-value" th:text="${teacher.qualification != null ? teacher.qualification : 'N/A'}">PhD</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Department:</span>
-                            <span class="info-value" th:text="${teacher.department != null ? teacher.department.name : 'Not Assigned'}">CSE</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="page-header">
+        <h2><i class="bi bi-person-circle"></i> My Profile</h2>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div
+        th:if="${successMessage}"
+        class="alert alert-success"
+      >
+        <i class="bi bi-check-circle"></i> <span th:text="${successMessage}"></span>
+      </div>
+      <div
+        th:if="${errorMessage}"
+        class="alert alert-danger"
+      >
+        <i class="bi bi-exclamation-circle"></i> <span th:text="${errorMessage}"></span>
+      </div>
+
+      <div class="row">
+        <div class="col-half">
+          <div class="card">
+            <div class="profile-header">
+              <div
+                class="profile-avatar"
+                th:text="${#strings.substring(teacher.firstName, 0, 1) + #strings.substring(teacher.lastName, 0, 1)}"
+              >
+                JS
+              </div>
+              <h2 th:text="${teacher.fullName}">John Smith</h2>
+              <p
+                th:text="${teacher.designation != null ? teacher.designation : 'Teacher'}"
+              >
+                Professor
+              </p>
             </div>
-            
-            <div class="col-half">
-                <div class="card">
-                    <div class="card-header">✏️ Update Profile</div>
-                    <div class="card-body">
-                        <form th:action="@{/teachers/profile/update}" method="post">
-                            <input type="hidden" name="id" th:value="${teacher.id}">
-                            
-                            <div class="form-group">
-                                <label for="firstName">First Name *</label>
-                                <input type="text" id="firstName" name="firstName" class="form-control" 
-                                       th:value="${teacher.firstName}" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="lastName">Last Name *</label>
-                                <input type="text" id="lastName" name="lastName" class="form-control" 
-                                       th:value="${teacher.lastName}" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" id="phone" name="phone" class="form-control" 
-                                       th:value="${teacher.phone}">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="qualification">Qualification</label>
-                                <input type="text" id="qualification" name="qualification" class="form-control" 
-                                       th:value="${teacher.qualification}">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="designation">Designation</label>
-                                <select id="designation" name="designation" class="form-control">
-                                    <option value="">-- Select Designation --</option>
-                                    <option value="Professor" th:selected="${teacher.designation == 'Professor'}">Professor</option>
-                                    <option value="Associate Professor" th:selected="${teacher.designation == 'Associate Professor'}">Associate Professor</option>
-                                    <option value="Assistant Professor" th:selected="${teacher.designation == 'Assistant Professor'}">Assistant Professor</option>
-                                    <option value="Lecturer" th:selected="${teacher.designation == 'Lecturer'}">Lecturer</option>
-                                    <option value="Senior Lecturer" th:selected="${teacher.designation == 'Senior Lecturer'}">Senior Lecturer</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="departmentId">Department</label>
-                                <select id="departmentId" name="departmentId" class="form-control">
-                                    <option value="">-- Select Department --</option>
-                                    <option th:each="dept : ${departments}" 
-                                            th:value="${dept.id}" 
-                                            th:text="${dept.name + ' (' + dept.code + ')'}"
-                                            th:selected="${teacher.department != null && teacher.department.id == dept.id}">CSE</option>
-                                </select>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary">Update Profile</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="profile-info">
+              <div class="info-row">
+                <span class="info-label"
+                  ><i class="bi bi-envelope"></i> Email:</span
+                >
+                <span class="info-value" th:text="${teacher.email}"
+                  >john@example.com</span
+                >
+              </div>
+              <div class="info-row">
+                <span class="info-label"
+                  ><i class="bi bi-telephone"></i> Phone:</span
+                >
+                <span
+                  class="info-value"
+                  th:text="${teacher.phone != null ? teacher.phone : 'N/A'}"
+                  >123-456-7890</span
+                >
+              </div>
+              <div class="info-row">
+                <span class="info-label"
+                  ><i class="bi bi-award"></i> Qualification:</span
+                >
+                <span
+                  class="info-value"
+                  th:text="${teacher.qualification != null ? teacher.qualification : 'N/A'}"
+                  >PhD</span
+                >
+              </div>
+              <div class="info-row">
+                <span class="info-label"
+                  ><i class="bi bi-building"></i> Department:</span
+                >
+                <span
+                  class="info-value"
+                  th:text="${teacher.department != null ? teacher.department.name : 'Not Assigned'}"
+                  >CSE</span
+                >
+              </div>
             </div>
+          </div>
         </div>
+
+        <div class="col-half">
+          <div class="card">
+            <div class="card-header">
+              <i class="bi bi-pencil-square"></i> Update Profile
+            </div>
+            <div class="card-body">
+              <form th:action="@{/teachers/profile/update}" method="post">
+                <input type="hidden" name="id" th:value="${teacher.id}" />
+
+                <div class="form-group">
+                  <label for="firstName">First Name *</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    class="form-control"
+                    th:value="${teacher.firstName}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName">Last Name *</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    class="form-control"
+                    th:value="${teacher.lastName}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    class="form-control"
+                    th:value="${teacher.phone}"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="qualification">Qualification</label>
+                  <input
+                    type="text"
+                    id="qualification"
+                    name="qualification"
+                    class="form-control"
+                    th:value="${teacher.qualification}"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="designation">Designation</label>
+                  <select
+                    id="designation"
+                    name="designation"
+                    class="form-control"
+                  >
+                    <option value="">-- Select Designation --</option>
+                    <option
+                      value="Professor"
+                      th:selected="${teacher.designation == 'Professor'}"
+                    >
+                      Professor
+                    </option>
+                    <option
+                      value="Associate Professor"
+                      th:selected="${teacher.designation == 'Associate Professor'}"
+                    >
+                      Associate Professor
+                    </option>
+                    <option
+                      value="Assistant Professor"
+                      th:selected="${teacher.designation == 'Assistant Professor'}"
+                    >
+                      Assistant Professor
+                    </option>
+                    <option
+                      value="Lecturer"
+                      th:selected="${teacher.designation == 'Lecturer'}"
+                    >
+                      Lecturer
+                    </option>
+                    <option
+                      value="Senior Lecturer"
+                      th:selected="${teacher.designation == 'Senior Lecturer'}"
+                    >
+                      Senior Lecturer
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="departmentId">Department</label>
+                  <select
+                    id="departmentId"
+                    name="departmentId"
+                    class="form-control"
+                  >
+                    <option value="">-- Select Department --</option>
+                    <option
+                      th:each="dept : ${departments}"
+                      th:value="${dept.id}"
+                      th:text="${dept.name + ' (' + dept.code + ')'}"
+                      th:selected="${teacher.department != null && teacher.department.id == dept.id}"
+                    >
+                      CSE
+                    </option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-check-lg"></i> Update Profile
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
     <footer class="footer">
-        <p>Student Management System - Spring Boot Project</p>
+      <p>
+        Student Management System - Spring Boot Project
+      </p>
     </footer>
-</body>
+  </body>
 </html>

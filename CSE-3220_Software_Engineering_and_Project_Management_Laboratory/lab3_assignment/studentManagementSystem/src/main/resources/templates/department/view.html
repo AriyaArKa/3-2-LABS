@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Department - Student Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <nav class="navbar">
-        <a th:href="@{/dashboard}" class="navbar-brand">🎓 Student Management System</a>
+        <a th:href="@{/dashboard}" class="navbar-brand"><i class="bi bi-mortarboard-fill"></i> Student Management</a>
         <ul class="navbar-nav">
-            <li><a th:href="@{/dashboard}">Dashboard</a></li>
-            <li><a th:href="@{/students}">Students</a></li>
-            <li><a th:href="@{/teachers}">Teachers</a></li>
-            <li><a th:href="@{/courses}">Courses</a></li>
-            <li><a th:href="@{/departments}" class="active">Departments</a></li>
+            <li><a th:href="@{/dashboard}"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a th:href="@{/students}"><i class="bi bi-people"></i> Students</a></li>
+            <li><a th:href="@{/teachers}"><i class="bi bi-person-workspace"></i> Teachers</a></li>
+            <li><a th:href="@{/courses}"><i class="bi bi-journal-text"></i> Courses</a></li>
+            <li><a th:href="@{/departments}" class="active"><i class="bi bi-building"></i> Departments</a></li>
             <li>
                 <form th:action="@{/logout}" method="post" style="display: inline;">
-                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</button>
                 </form>
             </li>
         </ul>
@@ -25,47 +26,48 @@
 
     <div class="container">
         <div class="page-header">
-            <h2>🏛️ Department Details</h2>
-            <a th:href="@{/departments}" class="btn btn-secondary">← Back to List</a>
+            <h2><i class="bi bi-building"></i> Department Details</h2>
+            <a th:href="@{/departments}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back to List</a>
         </div>
-        
+
         <div class="card">
-            <div class="card-header" th:text="${department.name}">Computer Science and Engineering</div>
+            <div class="card-header"><i class="bi bi-building-fill"></i> <span th:text="${department.name}">Computer Science and Engineering</span></div>
             <div class="card-body">
                 <div class="info-row">
-                    <span class="info-label">Code:</span>
+                    <span class="info-label"><i class="bi bi-hash"></i> Code:</span>
                     <span class="info-value" th:text="${department.code}">CSE</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Name:</span>
+                    <span class="info-label"><i class="bi bi-building"></i> Name:</span>
                     <span class="info-value" th:text="${department.name}">Computer Science</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Description:</span>
+                    <span class="info-label"><i class="bi bi-card-text"></i> Description:</span>
                     <span class="info-value" th:text="${department.description != null ? department.description : 'N/A'}">Description</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Total Students:</span>
+                    <span class="info-label"><i class="bi bi-people"></i> Total Students:</span>
                     <span class="info-value" th:text="${department.studentCount}">50</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Total Teachers:</span>
+                    <span class="info-label"><i class="bi bi-person-workspace"></i> Total Teachers:</span>
                     <span class="info-value" th:text="${department.teacherCount}">10</span>
                 </div>
-                
+
                 <div class="mt-20">
-                    <a th:href="@{/departments/edit/{id}(id=${department.id})}" class="btn btn-warning">Edit Department</a>
+                    <a th:href="@{/departments/edit/{id}(id=${department.id})}" class="btn btn-warning"><i class="bi bi-pencil"></i> Edit Department</a>
                     <form th:action="@{/departments/delete/{id}(id=${department.id})}" method="post" style="display: inline;">
-                        <button type="submit" class="btn btn-danger" 
-                                onclick="return confirm('Are you sure you want to delete this department?')">Delete Department</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this department?');">
+                            <i class="bi bi-trash"></i> Delete Department
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <footer class="footer">
-        <p>Student Management System - Spring Boot Project</p>
+        <p><i class="bi bi-code-slash"></i> Student Management System - Spring Boot Project</p>
     </footer>
 </body>
 </html>

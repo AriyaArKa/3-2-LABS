@@ -18,18 +18,21 @@ A comprehensive Student Management System built with Spring Boot, following MVC 
 ## ✨ Features
 
 ### 🔐 Security Features
+
 - Spring Security implementation for authentication and authorization
 - Role-based access control (ROLE_STUDENT, ROLE_TEACHER)
 - BCrypt password encoding
 - Session management
 
 ### 👨‍🎓 Student Features
+
 - View personal profile
 - View enrolled courses
 - Enroll/Drop courses
 - View department information
 
 ### 👨‍🏫 Teacher Features
+
 - Full CRUD operations on Students
 - Full CRUD operations on Teachers
 - Full CRUD operations on Courses
@@ -38,16 +41,16 @@ A comprehensive Student Management System built with Spring Boot, following MVC 
 
 ## 🛠 Technology Stack
 
-| Technology | Purpose |
-|------------|---------|
-| Spring Boot 4.0.2 | Backend Framework |
-| Spring Security | Authentication & Authorization |
-| Spring Data JPA | Data Persistence |
-| PostgreSQL | Database |
-| Thymeleaf | Template Engine |
-| Lombok | Boilerplate Code Reduction |
-| Docker Compose | Container Management |
-| Maven | Build Tool |
+| Technology        | Purpose                        |
+| ----------------- | ------------------------------ |
+| Spring Boot 4.0.2 | Backend Framework              |
+| Spring Security   | Authentication & Authorization |
+| Spring Data JPA   | Data Persistence               |
+| PostgreSQL        | Database                       |
+| Thymeleaf         | Template Engine                |
+| Lombok            | Boilerplate Code Reduction     |
+| Docker Compose    | Container Management           |
+| Maven             | Build Tool                     |
 
 ## 🏗 Architecture
 
@@ -94,6 +97,7 @@ This project follows the **MVC (Model-View-Controller)** architecture pattern:
 - If valid, the user is authenticated
 
 **In this application:**
+
 - Users login with username and password
 - `CustomUserDetailsService` loads user from database
 - Spring Security verifies password using BCrypt encoder
@@ -106,19 +110,20 @@ This project follows the **MVC (Model-View-Controller)** architecture pattern:
 - Based on user's role or permissions
 
 **In this application:**
+
 - Users have roles: `ROLE_TEACHER` or `ROLE_STUDENT`
 - Teachers can access all CRUD operations
 - Students can only view their own profile and courses
 
 ### Comparison Table
 
-| Aspect | Authentication | Authorization |
-|--------|----------------|---------------|
-| Purpose | Verify identity | Grant/deny access |
-| Question | Who are you? | What can you do? |
-| Order | Happens first | Happens after authentication |
-| Method | Username/Password, Biometrics | Roles, Permissions, Policies |
-| Failure Result | 401 Unauthorized | 403 Forbidden |
+| Aspect         | Authentication                | Authorization                |
+| -------------- | ----------------------------- | ---------------------------- |
+| Purpose        | Verify identity               | Grant/deny access            |
+| Question       | Who are you?                  | What can you do?             |
+| Order          | Happens first                 | Happens after authentication |
+| Method         | Username/Password, Biometrics | Roles, Permissions, Policies |
+| Failure Result | 401 Unauthorized              | 403 Forbidden                |
 
 ## 📁 Project Structure
 
@@ -234,11 +239,13 @@ src/main/resources/
 ### Option 1: Using Docker Compose (Recommended)
 
 1. **Start PostgreSQL container:**
+
    ```bash
    docker-compose up -d
    ```
 
 2. **Run the application:**
+
    ```bash
    ./mvnw spring-boot:run
    ```
@@ -249,6 +256,7 @@ src/main/resources/
 ### Option 2: Local PostgreSQL
 
 1. **Create database:**
+
    ```sql
    CREATE DATABASE student_management;
    CREATE USER arka WITH PASSWORD 'arka';
@@ -264,31 +272,31 @@ src/main/resources/
 
 ### ROLE_STUDENT
 
-| Permission | Allowed |
-|------------|---------|
-| View own profile | ✅ |
-| View department | ✅ |
-| View enrolled courses | ✅ |
-| Enroll/Drop courses | ✅ |
-| Modify teacher info | ❌ |
-| Access admin endpoints | ❌ |
-| CRUD operations | ❌ |
+| Permission             | Allowed |
+| ---------------------- | ------- |
+| View own profile       | ✅      |
+| View department        | ✅      |
+| View enrolled courses  | ✅      |
+| Enroll/Drop courses    | ✅      |
+| Modify teacher info    | ❌      |
+| Access admin endpoints | ❌      |
+| CRUD operations        | ❌      |
 
 ### ROLE_TEACHER
 
-| Permission | Allowed |
-|------------|---------|
-| Manage students (CRUD) | ✅ |
-| Manage teachers (CRUD) | ✅ |
-| Manage courses (CRUD) | ✅ |
-| Manage departments (CRUD) | ✅ |
-| Update own profile | ✅ |
-| Access all endpoints | ✅ |
+| Permission                | Allowed |
+| ------------------------- | ------- |
+| Manage students (CRUD)    | ✅      |
+| Manage teachers (CRUD)    | ✅      |
+| Manage courses (CRUD)     | ✅      |
+| Manage departments (CRUD) | ✅      |
+| Update own profile        | ✅      |
+| Access all endpoints      | ✅      |
 
 ## 🔑 Demo Credentials
 
-| Role | Username | Password |
-|------|----------|----------|
+| Role    | Username | Password   |
+| ------- | -------- | ---------- |
 | Teacher | teacher1 | teacher123 |
 | Teacher | teacher2 | teacher123 |
 | Student | student1 | student123 |
@@ -300,68 +308,74 @@ src/main/resources/
 All CRUD operations use **POST** requests as specified.
 
 ### Public Endpoints
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/` | Home page (redirects) |
-| GET | `/login` | Login page |
-| GET | `/about` | About page (Auth vs Authz) |
+
+| Method | URL      | Description                |
+| ------ | -------- | -------------------------- |
+| GET    | `/`      | Home page (redirects)      |
+| GET    | `/login` | Login page                 |
+| GET    | `/about` | About page (Auth vs Authz) |
 
 ### Student Endpoints (Student Role)
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/students/profile` | View own profile |
-| GET | `/students/my-courses` | View enrolled courses |
-| GET | `/students/my-department` | View department info |
-| POST | `/students/enroll/{id}` | Enroll in course |
-| POST | `/students/drop/{id}` | Drop course |
+
+| Method | URL                       | Description           |
+| ------ | ------------------------- | --------------------- |
+| GET    | `/students/profile`       | View own profile      |
+| GET    | `/students/my-courses`    | View enrolled courses |
+| GET    | `/students/my-department` | View department info  |
+| POST   | `/students/enroll/{id}`   | Enroll in course      |
+| POST   | `/students/drop/{id}`     | Drop course           |
 
 ### Admin Endpoints (Teacher Role)
 
 #### Students
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/students` | List all students |
-| GET | `/students/new` | Create form |
-| GET | `/students/edit/{id}` | Edit form |
-| GET | `/students/view/{id}` | View details |
-| POST | `/students/create` | Create student |
-| POST | `/students/update/{id}` | Update student |
-| POST | `/students/delete/{id}` | Delete student |
+
+| Method | URL                     | Description       |
+| ------ | ----------------------- | ----------------- |
+| GET    | `/students`             | List all students |
+| GET    | `/students/new`         | Create form       |
+| GET    | `/students/edit/{id}`   | Edit form         |
+| GET    | `/students/view/{id}`   | View details      |
+| POST   | `/students/create`      | Create student    |
+| POST   | `/students/update/{id}` | Update student    |
+| POST   | `/students/delete/{id}` | Delete student    |
 
 #### Teachers
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/teachers` | List all teachers |
-| GET | `/teachers/new` | Create form |
-| GET | `/teachers/edit/{id}` | Edit form |
-| GET | `/teachers/view/{id}` | View details |
-| GET | `/teachers/profile` | Own profile |
-| POST | `/teachers/create` | Create teacher |
-| POST | `/teachers/update/{id}` | Update teacher |
-| POST | `/teachers/delete/{id}` | Delete teacher |
-| POST | `/teachers/profile/update` | Update own profile |
+
+| Method | URL                        | Description        |
+| ------ | -------------------------- | ------------------ |
+| GET    | `/teachers`                | List all teachers  |
+| GET    | `/teachers/new`            | Create form        |
+| GET    | `/teachers/edit/{id}`      | Edit form          |
+| GET    | `/teachers/view/{id}`      | View details       |
+| GET    | `/teachers/profile`        | Own profile        |
+| POST   | `/teachers/create`         | Create teacher     |
+| POST   | `/teachers/update/{id}`    | Update teacher     |
+| POST   | `/teachers/delete/{id}`    | Delete teacher     |
+| POST   | `/teachers/profile/update` | Update own profile |
 
 #### Courses
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/courses` | List all courses |
-| GET | `/courses/new` | Create form |
-| GET | `/courses/edit/{id}` | Edit form |
-| GET | `/courses/view/{id}` | View details |
-| POST | `/courses/create` | Create course |
-| POST | `/courses/update/{id}` | Update course |
-| POST | `/courses/delete/{id}` | Delete course |
+
+| Method | URL                    | Description      |
+| ------ | ---------------------- | ---------------- |
+| GET    | `/courses`             | List all courses |
+| GET    | `/courses/new`         | Create form      |
+| GET    | `/courses/edit/{id}`   | Edit form        |
+| GET    | `/courses/view/{id}`   | View details     |
+| POST   | `/courses/create`      | Create course    |
+| POST   | `/courses/update/{id}` | Update course    |
+| POST   | `/courses/delete/{id}` | Delete course    |
 
 #### Departments
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/departments` | List all departments |
-| GET | `/departments/new` | Create form |
-| GET | `/departments/edit/{id}` | Edit form |
-| GET | `/departments/view/{id}` | View details |
-| POST | `/departments/create` | Create department |
-| POST | `/departments/update/{id}` | Update department |
-| POST | `/departments/delete/{id}` | Delete department |
+
+| Method | URL                        | Description          |
+| ------ | -------------------------- | -------------------- |
+| GET    | `/departments`             | List all departments |
+| GET    | `/departments/new`         | Create form          |
+| GET    | `/departments/edit/{id}`   | Edit form            |
+| GET    | `/departments/view/{id}`   | View details         |
+| POST   | `/departments/create`      | Create department    |
+| POST   | `/departments/update/{id}` | Update department    |
+| POST   | `/departments/delete/{id}` | Delete department    |
 
 ---
 
