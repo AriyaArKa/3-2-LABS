@@ -710,7 +710,7 @@ This project is created for educational purposes as part of a Software Engineeri
 
 ## 👨‍💻 Author
 
-**Arkadeep Banerjee**
+**Arka Braja Prasad Nath**
 
 [![GitHub](https://img.shields.io/badge/GitHub-AriyaArKa-181717?style=for-the-badge&logo=github)](https://github.com/AriyaArKa)
 
