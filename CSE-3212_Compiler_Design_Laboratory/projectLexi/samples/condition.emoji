@@ -1,0 +1,10 @@
+💬 If-Else Condition
+▶️
+🔢 📛 x = 10;
+🤔 (📛 x 🔼 5) {
+    📤 "x is greater than 5";
+}
+🔁❓ {
+    📤 "x is not greater than 5";
+}
+⏹️
