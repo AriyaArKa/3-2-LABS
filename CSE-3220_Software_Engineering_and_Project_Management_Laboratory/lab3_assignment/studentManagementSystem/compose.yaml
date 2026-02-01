@@ -2,8 +2,27 @@
 # Docker Compose for Student Management System
 # ===========================================
 services:
+  # Spring Boot Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: student_management_app
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/student_management
+      - SPRING_DATASOURCE_USERNAME=arka
+      - SPRING_DATASOURCE_PASSWORD=arka
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # PostgreSQL Database
   postgres:
-    image: 'postgres:latest'
+    image: 'postgres:16-alpine'
     container_name: student_management_db
     environment:
       - 'POSTGRES_DB=student_management'
@@ -13,7 +32,13 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U arka -d student_management"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     restart: unless-stopped
 
 volumes:
   postgres_data:
+

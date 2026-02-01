@@ -516,8 +516,8 @@ erDiagram
 
 | Requirement   | Version                  |
 | ------------- | ------------------------ |
-| ☕ Java       | 21+                      |
-| 📦 Maven      | 3.9+                     |
+| ☕ Java       | 21+ (for local dev)      |
+| 📦 Maven      | 3.9+ (for local dev)     |
 | 🐳 Docker     | Latest                   |
 | 🐘 PostgreSQL | 16 (if not using Docker) |
 
@@ -525,15 +525,40 @@ erDiagram
 </tr>
 </table>
 
-### Option 1: Using Docker Compose (Recommended) 🐳
+### Option 1: Full Docker Deployment (Recommended) 🐳
+
+Run the entire application stack (Spring Boot + PostgreSQL) in containers:
+
+```bash
+# Build and start all services
+docker-compose up -d --build
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+```
+
+🌐 Access the application at [http://localhost:8080](http://localhost:8080)
+
+**Docker Services:**
+| Service | Container Name | Port |
+|---------|----------------|------|
+| Spring Boot App | `student_management_app` | 8080 |
+| PostgreSQL DB | `student_management_db` | 5432 |
+
+### Option 2: Docker Database + Local App 🐳 + ☕
+
+Run only the database in Docker, application locally (good for development):
 
 1. **Start PostgreSQL container:**
 
    ```bash
-   docker-compose up -d
+   docker-compose up -d postgres
    ```
 
-2. **Run the application:**
+2. **Run the application locally:**
 
    ```bash
    ./mvnw spring-boot:run
@@ -543,7 +568,7 @@ erDiagram
 
    🌐 Open [http://localhost:8080](http://localhost:8080) in your browser
 
-### Option 2: Local PostgreSQL 🐘
+### Option 3: Local PostgreSQL 🐘
 
 1. **Create database:**
 
