@@ -26,8 +26,24 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Only initialize if roles don't exist
-        if (roleRepository.count() == 0) {
+        long roleCount = roleRepository.count();
+        long studentCount = studentRepository.count();
+        long teacherCount = teacherRepository.count();
+
+        System.out.println("===========================================");
+        System.out.println("DATABASE STATUS CHECK");
+        System.out.println("===========================================");
+        System.out.println("Roles in database: " + roleCount);
+        System.out.println("Students in database: " + studentCount);
+        System.out.println("Teachers in database: " + teacherCount);
+        System.out.println("===========================================");
+
+        if (roleCount == 0) {
+            System.out.println("Database is empty. Initializing with demo data...");
             initializeData();
+        } else {
+            System.out.println("Database already contains data. Skipping initialization.");
+            System.out.println("Using existing data from file-based database.");
         }
     }
 

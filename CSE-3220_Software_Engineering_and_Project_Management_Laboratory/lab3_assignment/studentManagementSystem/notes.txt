@@ -1,0 +1,12 @@
+cd "D:\3-2\Lab\CSE-3220_Software_Engineering_and_Project_Management_Laboratory\lab3_assignment\studentManagementSystem"
+.\mvnw.cmd spring-boot:run
+
+
+teacher1
+teacher123
+
+student1
+student123
+
+arka55
+arka55
