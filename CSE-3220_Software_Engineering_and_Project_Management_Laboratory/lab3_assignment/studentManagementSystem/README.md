@@ -42,6 +42,7 @@
 <td width="50%">
 
 ### 🔐 Security Features
+
 - ✅ Spring Security implementation
 - ✅ Role-based access control (RBAC)
 - ✅ BCrypt password encoding
@@ -52,6 +53,7 @@
 <td width="50%">
 
 ### 👨‍🎓 Student Features
+
 - ✅ View personal profile
 - ✅ View enrolled courses
 - ✅ Enroll/Drop courses
@@ -64,6 +66,7 @@
 <td width="50%">
 
 ### 👨‍🏫 Teacher Features
+
 - ✅ Full CRUD on Students
 - ✅ Full CRUD on Teachers
 - ✅ Full CRUD on Courses
@@ -74,6 +77,7 @@
 <td width="50%">
 
 ### 🎨 UI/UX Features
+
 - ✅ Responsive design
 - ✅ Modern interface
 - ✅ Intuitive navigation
@@ -206,16 +210,16 @@
 
 <div align="center">
 
-| Technology | Purpose | Version |
-|:----------:|:-------:|:-------:|
-| ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white) | Backend Framework | 4.0.2 |
-| ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white) | Authentication & Authorization | 6.x |
-| ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white) | Database | 16 |
-| ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white) | Template Engine | 3.x |
-| ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) | Container Management | Latest |
-| ![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat-square&logo=apachemaven&logoColor=white) | Build Tool | 3.9+ |
-| ![Lombok](https://img.shields.io/badge/Lombok-BC4521?style=flat-square&logo=lombok&logoColor=white) | Boilerplate Reduction | Latest |
-| ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white) | Programming Language | 21 |
+|                                                          Technology                                                           |            Purpose             | Version |
+| :---------------------------------------------------------------------------------------------------------------------------: | :----------------------------: | :-----: |
+|       ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)       |       Backend Framework        |  4.0.2  |
+| ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white) | Authentication & Authorization |   6.x   |
+|        ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white)        |            Database            |   16    |
+|         ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white)          |        Template Engine         |   3.x   |
+|              ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)              |      Container Management      | Latest  |
+|            ![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat-square&logo=apachemaven&logoColor=white)             |           Build Tool           |  3.9+   |
+|              ![Lombok](https://img.shields.io/badge/Lombok-BC4521?style=flat-square&logo=lombok&logoColor=white)              |     Boilerplate Reduction      | Latest  |
+|               ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)                |      Programming Language      |   21    |
 
 </div>
 
@@ -225,11 +229,11 @@
 
 ### UI Technology Stack
 
-| Component | Technology | Description |
-|:---------:|:----------:|:------------|
-| **Template Engine** | ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white) | Server-side Java template engine for dynamic HTML rendering |
-| **Styling** | ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) | Custom hand-written CSS (No CSS frameworks) |
-| **Icons** | ![Bootstrap Icons](https://img.shields.io/badge/Bootstrap_Icons-7952B3?style=flat-square&logo=bootstrap&logoColor=white) | Modern icon library for UI elements |
+|      Component      |                                                        Technology                                                        | Description                                                 |
+| :-----------------: | :----------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------- |
+| **Template Engine** |       ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white)       | Server-side Java template engine for dynamic HTML rendering |
+|     **Styling**     |              ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)               | Custom hand-written CSS (No CSS frameworks)                 |
+|      **Icons**      | ![Bootstrap Icons](https://img.shields.io/badge/Bootstrap_Icons-7952B3?style=flat-square&logo=bootstrap&logoColor=white) | Modern icon library for UI elements                         |
 
 ### 🚫 No CSS Framework Used
 
@@ -248,6 +252,7 @@ This project intentionally uses **pure custom CSS** without any CSS frameworks l
 <td width="50%">
 
 **🎯 Design Principles**
+
 - Clean and modern interface
 - Consistent color scheme
 - Intuitive navigation
@@ -258,6 +263,7 @@ This project intentionally uses **pure custom CSS** without any CSS frameworks l
 <td width="50%">
 
 **📱 Responsive Design**
+
 - Flexbox layouts
 - Mobile-friendly navigation
 - Adaptive tables
@@ -293,18 +299,16 @@ The UI leverages Thymeleaf's powerful features:
 <span th:text="${student.name}">Student Name</span>
 
 <!-- Conditional rendering based on roles -->
-<div sec:authorize="hasRole('TEACHER')">
-    Admin Content Here
-</div>
+<div sec:authorize="hasRole('TEACHER')">Admin Content Here</div>
 
 <!-- Iteration for lists -->
 <tr th:each="student : ${students}">
-    <td th:text="${student.email}">email@example.com</td>
+  <td th:text="${student.email}">email@example.com</td>
 </tr>
 
 <!-- Form binding with Spring MVC -->
 <form th:action="@{/students/create}" th:object="${student}" method="post">
-    <input th:field="*{name}" type="text" />
+  <input th:field="*{name}" type="text" />
 </form>
 ```
 
@@ -357,13 +361,13 @@ This project follows the **MVC (Model-View-Controller)** architecture pattern:
 
 <div align="center">
 
-| Aspect | 🔑 Authentication | 🛡️ Authorization |
-|:------:|:----------------:|:----------------:|
-| **Purpose** | Verify identity | Grant/deny access |
-| **Question** | *"Who are you?"* | *"What can you do?"* |
-| **Order** | Happens first | Happens after authentication |
-| **Method** | Username/Password, Biometrics | Roles, Permissions, Policies |
-| **Failure** | `401 Unauthorized` | `403 Forbidden` |
+|    Aspect    |       🔑 Authentication       |       🛡️ Authorization       |
+| :----------: | :---------------------------: | :--------------------------: |
+| **Purpose**  |        Verify identity        |      Grant/deny access       |
+| **Question** |       _"Who are you?"_        |     _"What can you do?"_     |
+|  **Order**   |         Happens first         | Happens after authentication |
+|  **Method**  | Username/Password, Biometrics | Roles, Permissions, Policies |
+| **Failure**  |      `401 Unauthorized`       |       `403 Forbidden`        |
 
 </div>
 
@@ -490,15 +494,15 @@ erDiagram
 
 ### 📊 Tables
 
-| Table | Description |
-|-------|-------------|
-| `users` | System users for authentication |
-| `roles` | User roles (ROLE_STUDENT, ROLE_TEACHER) |
-| `departments` | Academic departments |
-| `teachers` | Teacher information |
-| `students` | Student information |
-| `courses` | Course information |
-| `student_courses` | Many-to-many relationship table |
+| Table             | Description                             |
+| ----------------- | --------------------------------------- |
+| `users`           | System users for authentication         |
+| `roles`           | User roles (ROLE_STUDENT, ROLE_TEACHER) |
+| `departments`     | Academic departments                    |
+| `teachers`        | Teacher information                     |
+| `students`        | Student information                     |
+| `courses`         | Course information                      |
+| `student_courses` | Many-to-many relationship table         |
 
 ---
 
@@ -510,11 +514,11 @@ erDiagram
 <tr>
 <td>
 
-| Requirement | Version |
-|-------------|---------|
-| ☕ Java | 21+ |
-| 📦 Maven | 3.9+ |
-| 🐳 Docker | Latest |
+| Requirement   | Version                  |
+| ------------- | ------------------------ |
+| ☕ Java       | 21+                      |
+| 📦 Maven      | 3.9+                     |
+| 🐳 Docker     | Latest                   |
 | 🐘 PostgreSQL | 16 (if not using Docker) |
 
 </td>
@@ -530,6 +534,7 @@ erDiagram
    ```
 
 2. **Run the application:**
+
    ```bash
    ./mvnw spring-boot:run
    ```
@@ -549,6 +554,7 @@ erDiagram
    ```
 
 2. **Run the application:**
+
    ```bash
    ./mvnw spring-boot:run
    ```
@@ -565,26 +571,26 @@ erDiagram
 
 ### 🎓 ROLE_STUDENT
 
-| Permission | Allowed |
-|:-----------|:-------:|
-| View own profile | ✅ |
-| View department | ✅ |
-| View enrolled courses | ✅ |
-| Enroll/Drop courses | ✅ |
-| Modify teacher info | ❌ |
-| Access admin endpoints | ❌ |
-| CRUD operations | ❌ |
+| Permission             | Allowed |
+| :--------------------- | :-----: |
+| View own profile       |   ✅    |
+| View department        |   ✅    |
+| View enrolled courses  |   ✅    |
+| Enroll/Drop courses    |   ✅    |
+| Modify teacher info    |   ❌    |
+| Access admin endpoints |   ❌    |
+| CRUD operations        |   ❌    |
 
 ### 👨‍🏫 ROLE_TEACHER
 
-| Permission | Allowed |
-|:-----------|:-------:|
-| Manage students (CRUD) | ✅ |
-| Manage teachers (CRUD) | ✅ |
-| Manage courses (CRUD) | ✅ |
-| Manage departments (CRUD) | ✅ |
-| Update own profile | ✅ |
-| Access all endpoints | ✅ |
+| Permission                | Allowed |
+| :------------------------ | :-----: |
+| Manage students (CRUD)    |   ✅    |
+| Manage teachers (CRUD)    |   ✅    |
+| Manage courses (CRUD)     |   ✅    |
+| Manage departments (CRUD) |   ✅    |
+| Update own profile        |   ✅    |
+| Access all endpoints      |   ✅    |
 
 </div>
 
@@ -594,8 +600,8 @@ erDiagram
 
 <div align="center">
 
-| Role | Username | Password |
-|:----:|:--------:|:--------:|
+|    Role    |  Username  |   Password   |
+| :--------: | :--------: | :----------: |
 | 👨‍🏫 Teacher | `teacher1` | `teacher123` |
 | 👨‍🏫 Teacher | `teacher2` | `teacher123` |
 | 🎓 Student | `student1` | `student123` |
@@ -605,6 +611,7 @@ erDiagram
 </div>
 
 ---
+
 ## 🌐 API Endpoints
 
 All CRUD operations use **POST** requests as specified.
