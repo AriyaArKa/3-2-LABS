@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - Student Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <a th:href="@{/dashboard}" class="navbar-brand">🎓 Student Management System</a>
+        <ul class="navbar-nav">
+            <li><a th:href="@{/dashboard}" class="active">Dashboard</a></li>
+            <li><a th:href="@{/students}">Students</a></li>
+            <li><a th:href="@{/teachers}">Teachers</a></li>
+            <li><a th:href="@{/courses}">Courses</a></li>
+            <li><a th:href="@{/departments}">Departments</a></li>
+            <li><a th:href="@{/teachers/profile}">My Profile</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Welcome, <span th:text="${teacher.fullName}">Teacher</span>! 👋</h1>
+            <p>Role: Teacher | Department: <span th:text="${teacher.department != null ? teacher.department.name : 'Not Assigned'}">CSE</span></p>
+        </div>
+        
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-number">📚</div>
+                <div class="stat-label">Manage Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">👨‍🏫</div>
+                <div class="stat-label">Manage Teachers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">📖</div>
+                <div class="stat-label">Manage Courses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">🏛️</div>
+                <div class="stat-label">Manage Departments</div>
+            </div>
+        </div>
+        
+        <h2 class="mb-20">Quick Actions</h2>
+        <div class="quick-actions">
+            <a th:href="@{/students}" class="action-card">
+                <div class="action-icon">👨‍🎓</div>
+                <div>View Students</div>
+            </a>
+            <a th:href="@{/students/new}" class="action-card">
+                <div class="action-icon">➕</div>
+                <div>Add Student</div>
+            </a>
+            <a th:href="@{/teachers}" class="action-card">
+                <div class="action-icon">👨‍🏫</div>
+                <div>View Teachers</div>
+            </a>
+            <a th:href="@{/teachers/new}" class="action-card">
+                <div class="action-icon">➕</div>
+                <div>Add Teacher</div>
+            </a>
+            <a th:href="@{/courses}" class="action-card">
+                <div class="action-icon">📖</div>
+                <div>View Courses</div>
+            </a>
+            <a th:href="@{/courses/new}" class="action-card">
+                <div class="action-icon">➕</div>
+                <div>Add Course</div>
+            </a>
+            <a th:href="@{/departments}" class="action-card">
+                <div class="action-icon">🏛️</div>
+                <div>View Departments</div>
+            </a>
+            <a th:href="@{/departments/new}" class="action-card">
+                <div class="action-icon">➕</div>
+                <div>Add Department</div>
+            </a>
+        </div>
+        
+        <div class="card mt-20">
+            <div class="card-header">Your Profile Information</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <p><strong>Name:</strong> <span th:text="${teacher.fullName}">John Doe</span></p>
+                        <p><strong>Email:</strong> <span th:text="${teacher.email}">john@example.com</span></p>
+                    </div>
+                    <div class="col">
+                        <p><strong>Designation:</strong> <span th:text="${teacher.designation}">Professor</span></p>
+                        <p><strong>Qualification:</strong> <span th:text="${teacher.qualification}">PhD</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Student Management System - Spring Boot Project</p>
+    </footer>
+</body>
+</html>

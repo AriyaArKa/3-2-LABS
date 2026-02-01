@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers - Student Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <a th:href="@{/dashboard}" class="navbar-brand">🎓 Student Management System</a>
+        <ul class="navbar-nav">
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/students}">Students</a></li>
+            <li><a th:href="@{/teachers}" class="active">Teachers</a></li>
+            <li><a th:href="@{/courses}">Courses</a></li>
+            <li><a th:href="@{/departments}">Departments</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h2>👨‍🏫 Teachers Management</h2>
+            <a th:href="@{/teachers/new}" class="btn btn-success">+ Add New Teacher</a>
+        </div>
+        
+        <!-- Success/Error Messages -->
+        <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+        
+        <div class="card">
+            <div class="card-header">All Teachers</div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Designation</th>
+                                <th>Department</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="teacher, iter : ${teachers}">
+                                <td th:text="${iter.count}">1</td>
+                                <td th:text="${teacher.firstName + ' ' + teacher.lastName}">John Smith</td>
+                                <td th:text="${teacher.email}">john@example.com</td>
+                                <td th:text="${teacher.designation != null ? teacher.designation : 'N/A'}">Professor</td>
+                                <td th:text="${teacher.departmentName != null ? teacher.departmentName : 'N/A'}">CSE</td>
+                                <td>
+                                    <a th:href="@{/teachers/view/{id}(id=${teacher.id})}" class="btn btn-sm btn-primary">View</a>
+                                    <a th:href="@{/teachers/edit/{id}(id=${teacher.id})}" class="btn btn-sm btn-warning">Edit</a>
+                                    <form th:action="@{/teachers/delete/{id}(id=${teacher.id})}" method="post" style="display: inline;">
+                                        <button type="submit" class="btn btn-sm btn-danger" 
+                                                onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(teachers)}">
+                                <td colspan="6" class="text-center">No teachers found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Student Management System - Spring Boot Project</p>
+    </footer>
+</body>
+</html>

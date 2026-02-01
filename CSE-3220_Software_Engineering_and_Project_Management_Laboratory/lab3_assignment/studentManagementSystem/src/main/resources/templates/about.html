@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Authentication vs Authorization</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <a th:href="@{/}" class="navbar-brand">🎓 Student Management System</a>
+        <ul class="navbar-nav">
+            <li><a th:href="@{/login}">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="mb-20 mt-20">📚 Authentication vs Authorization</h1>
+        
+        <div class="theory-section">
+            <h3>🔐 Authentication - "Who are you?"</h3>
+            <p><strong>Authentication</strong> is the process of verifying the identity of a user, device, or system.</p>
+            <p>It answers the question: <em>"Who are you?"</em></p>
+            <p><strong>In this application:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Users provide a username and password</li>
+                <li>The system checks these credentials against the database</li>
+                <li>If valid, the user is authenticated and a session is created</li>
+                <li>Spring Security handles this via <code>CustomUserDetailsService</code></li>
+            </ul>
+            <p class="mt-10"><strong>Examples:</strong> Login with password, fingerprint scan, face recognition, OTP verification</p>
+        </div>
+        
+        <div class="theory-section">
+            <h3>✅ Authorization - "What are you allowed to do?"</h3>
+            <p><strong>Authorization</strong> is the process of determining what actions an authenticated user is permitted to perform.</p>
+            <p>It answers the question: <em>"What can you access?"</em></p>
+            <p><strong>In this application:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Users are assigned roles: <code>ROLE_TEACHER</code> or <code>ROLE_STUDENT</code></li>
+                <li>Teachers can manage students, courses, and departments (CRUD operations)</li>
+                <li>Students can only view their own profile, enrolled courses, and department</li>
+                <li>Spring Security handles this via <code>SecurityConfig</code> and URL-based authorization</li>
+            </ul>
+            <p class="mt-10"><strong>Examples:</strong> Admin access to admin panel, user access to their own data only</p>
+        </div>
+        
+        <div class="theory-section">
+            <h3>📊 Comparison Table</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Authentication</th>
+                        <th>Authorization</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Purpose</strong></td>
+                        <td>Verify identity</td>
+                        <td>Grant/deny access</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Question</strong></td>
+                        <td>Who are you?</td>
+                        <td>What can you do?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Order</strong></td>
+                        <td>Happens first</td>
+                        <td>Happens after authentication</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Method</strong></td>
+                        <td>Username/Password, Biometrics, Tokens</td>
+                        <td>Roles, Permissions, Policies</td>
+                    </tr>
+                    <tr>
+                        <td><strong>In Spring Security</strong></td>
+                        <td>UserDetailsService, AuthenticationManager</td>
+                        <td>hasRole(), hasAuthority(), @PreAuthorize</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Failure Result</strong></td>
+                        <td>401 Unauthorized</td>
+                        <td>403 Forbidden</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="theory-section">
+            <h3>🔧 Implementation in This Project</h3>
+            <p><strong>Authentication Flow:</strong></p>
+            <ol style="margin-left: 20px; margin-top: 10px;">
+                <li>User enters credentials on login page</li>
+                <li>Spring Security intercepts the login request</li>
+                <li><code>CustomUserDetailsService.loadUserByUsername()</code> loads user from database</li>
+                <li>Password is verified using BCrypt encoder</li>
+                <li>If successful, user is authenticated and redirected to dashboard</li>
+            </ol>
+            
+            <p class="mt-20"><strong>Authorization Configuration:</strong></p>
+            <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">
+// In SecurityConfig.java
+.authorizeHttpRequests(auth -> auth
+    // Public endpoints
+    .requestMatchers("/", "/login", "/about").permitAll()
+    
+    // Student-only endpoints
+    .requestMatchers("/students/profile", "/students/my-courses").hasRole("STUDENT")
+    
+    // Teacher-only endpoints
+    .requestMatchers("/students/**", "/teachers/**").hasRole("TEACHER")
+    .requestMatchers("/departments/**", "/courses/**").hasRole("TEACHER")
+    
+    // Dashboard for both roles
+    .requestMatchers("/dashboard").hasAnyRole("STUDENT", "TEACHER")
+)</pre>
+        </div>
+        
+        <div class="text-center mt-20 mb-20">
+            <a th:href="@{/login}" class="btn btn-primary">← Back to Login</a>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Student Management System - Spring Boot Project</p>
+    </footer>
+</body>
+</html>

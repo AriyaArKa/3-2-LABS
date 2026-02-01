@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${course.id != null ? 'Edit Course' : 'Add Course'} + ' - Student Management System'">Course Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <a th:href="@{/dashboard}" class="navbar-brand">🎓 Student Management System</a>
+        <ul class="navbar-nav">
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/students}">Students</a></li>
+            <li><a th:href="@{/teachers}">Teachers</a></li>
+            <li><a th:href="@{/courses}" class="active">Courses</a></li>
+            <li><a th:href="@{/departments}">Departments</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h2 th:text="${course.id != null ? '✏️ Edit Course' : '➕ Add New Course'}">Course Form</h2>
+            <a th:href="@{/courses}" class="btn btn-secondary">← Back to List</a>
+        </div>
+        
+        <!-- Error Message -->
+        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+        
+        <div class="card">
+            <div class="card-header" th:text="${course.id != null ? 'Edit Course Information' : 'New Course Information'}">Form</div>
+            <div class="card-body">
+                <form th:action="${course.id != null ? '/courses/update/' + course.id : '/courses/create'}" 
+                      method="post" th:object="${course}">
+                    
+                    <div class="row">
+                        <div class="col-half">
+                            <div class="form-group">
+                                <label for="code">Course Code *</label>
+                                <input type="text" id="code" th:field="*{code}" class="form-control" 
+                                       placeholder="e.g., CSE101, CSE202" required th:readonly="${course.id != null}">
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <div class="form-group">
+                                <label for="name">Course Name *</label>
+                                <input type="text" id="name" th:field="*{name}" class="form-control" 
+                                       placeholder="e.g., Introduction to Programming" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-half">
+                            <div class="form-group">
+                                <label for="credits">Credits *</label>
+                                <input type="number" id="credits" th:field="*{credits}" class="form-control" 
+                                       placeholder="3" min="1" max="6" required>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <div class="form-group">
+                                <label for="teacherId">Instructor</label>
+                                <select id="teacherId" th:field="*{teacherId}" class="form-control">
+                                    <option value="">-- Select Instructor --</option>
+                                    <option th:each="teacher : ${teachers}" 
+                                            th:value="${teacher.id}" 
+                                            th:text="${teacher.firstName + ' ' + teacher.lastName}">John Smith</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" th:field="*{description}" class="form-control" rows="4"
+                                  placeholder="Course description..."></textarea>
+                    </div>
+                    
+                    <div class="mt-20">
+                        <button type="submit" class="btn btn-primary" 
+                                th:text="${course.id != null ? 'Update Course' : 'Create Course'}">Submit</button>
+                        <a th:href="@{/courses}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Student Management System - Spring Boot Project</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Student Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <a th:href="@{/dashboard}" class="navbar-brand">🎓 Student Management System</a>
+        <ul class="navbar-nav">
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/students/profile}" class="active">My Profile</a></li>
+            <li><a th:href="@{/students/my-courses}">My Courses</a></li>
+            <li><a th:href="@{/students/my-department}">My Department</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h2>👤 My Profile</h2>
+        </div>
+        
+        <div class="card">
+            <div class="profile-header">
+                <div class="profile-avatar" th:text="${#strings.substring(student.firstName, 0, 1) + #strings.substring(student.lastName, 0, 1)}">JD</div>
+                <h2 th:text="${student.fullName}">John Doe</h2>
+                <p th:text="'Student ID: ' + ${student.studentId}">2024-1-60-001</p>
+            </div>
+            <div class="profile-info">
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" th:text="${student.email}">john@example.com</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phone:</span>
+                    <span class="info-value" th:text="${student.phone != null ? student.phone : 'N/A'}">123-456-7890</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Address:</span>
+                    <span class="info-value" th:text="${student.address != null ? student.address : 'N/A'}">123 Main St</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Department:</span>
+                    <span class="info-value" th:text="${student.department != null ? student.department.name : 'Not Assigned'}">CSE</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Semester:</span>
+                    <span class="info-value" th:text="${student.semester}">5</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-20">
+            <div class="card-header">📚 Enrolled Courses</div>
+            <div class="card-body">
+                <table th:if="${!#lists.isEmpty(enrolledCourses)}">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Course Code</th>
+                            <th>Course Name</th>
+                            <th>Credits</th>
+                            <th>Instructor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="course, iter : ${enrolledCourses}">
+                            <td th:text="${iter.count}">1</td>
+                            <td th:text="${course.code}">CSE101</td>
+                            <td th:text="${course.name}">Intro to Programming</td>
+                            <td th:text="${course.credits}">3</td>
+                            <td th:text="${course.teacher != null ? course.teacher.fullName : 'N/A'}">John Smith</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p th:if="${#lists.isEmpty(enrolledCourses)}" class="text-center">No courses enrolled yet.</p>
+                <div class="mt-10">
+                    <a th:href="@{/students/my-courses}" class="btn btn-primary">Manage My Courses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Student Management System - Spring Boot Project</p>
+    </footer>
+</body>
+</html>

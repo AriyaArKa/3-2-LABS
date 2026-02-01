@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Student - Student Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <a th:href="@{/dashboard}" class="navbar-brand">🎓 Student Management System</a>
+        <ul class="navbar-nav">
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/students}" class="active">Students</a></li>
+            <li><a th:href="@{/teachers}">Teachers</a></li>
+            <li><a th:href="@{/courses}">Courses</a></li>
+            <li><a th:href="@{/departments}">Departments</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h2>👨‍🎓 Student Details</h2>
+            <a th:href="@{/students}" class="btn btn-secondary">← Back to List</a>
+        </div>
+        
+        <div class="card">
+            <div class="profile-header">
+                <div class="profile-avatar" th:text="${#strings.substring(student.firstName, 0, 1) + #strings.substring(student.lastName, 0, 1)}">JD</div>
+                <h2 th:text="${student.firstName + ' ' + student.lastName}">John Doe</h2>
+                <p th:text="'Student ID: ' + ${student.studentId}">2024-1-60-001</p>
+            </div>
+            <div class="profile-info">
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" th:text="${student.email}">john@example.com</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phone:</span>
+                    <span class="info-value" th:text="${student.phone != null ? student.phone : 'N/A'}">123-456-7890</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Address:</span>
+                    <span class="info-value" th:text="${student.address != null ? student.address : 'N/A'}">123 Main St</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Department:</span>
+                    <span class="info-value" th:text="${student.departmentName != null ? student.departmentName : 'Not Assigned'}">CSE</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Semester:</span>
+                    <span class="info-value" th:text="${student.semester}">5</span>
+                </div>
+                
+                <div class="mt-20">
+                    <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-warning">Edit Student</a>
+                    <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger" 
+                                onclick="return confirm('Are you sure you want to delete this student?')">Delete Student</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Student Management System - Spring Boot Project</p>
+    </footer>
+</body>
+</html>
