@@ -1,0 +1,32 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\loop.emoji
+# Format: TOKEN_TYPE LEXEME
+
+<START, ▶️>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, i>
+<ASSIGN, =>
+<NUMBER, 0>
+<SEMI, ;>
+<LOOP, 🔁>
+<LPAREN, (>
+<NUMBER, 5>
+<RPAREN, )>
+<LBRACE, {>
+<LOG, 📝>
+<STRING, "Looping...">
+<SEMI, ;>
+<ID, 📛>
+<IDENTIFIER, i>
+<ASSIGN, =>
+<IDENTIFIER, i>
+<PLUS, +>
+<NUMBER, 1>
+<SEMI, ;>
+<RBRACE, }>
+<OUTPUT, 📤>
+<ID, 📛>
+<IDENTIFIER, i>
+<SEMI, ;>
+<END, ⏹️>

@@ -65,7 +65,7 @@ FILE *output_file;
 
 /* Function to output token for Bison */
 void output_token(int token, const char* token_name, const char* lexeme) {
-    fprintf(output_file, "%s %s\n", token_name, lexeme);
+    fprintf(output_file, "<%s, %s>\n", token_name, lexeme);
     printf("Line %d, Col %d: %-15s -> %s\n", line_num, col_num, lexeme, token_name);
 }
 
@@ -84,7 +84,7 @@ UTF8_4BYTE  [\xF0-\xF4]{UTF8_CONT}{3}
 
     /* ============ Program Structure ============ */
 
-    /* START: ▶️ (U+25B6 U+FE0F) or ▶ (U+25B6) with variation selector */
+    /* START: ▶️ (U+25B6 U+FE0F)*/
 "\xE2\x96\xB6\xEF\xB8\x8F"      { output_token(START, "START", yytext); col_num += 2; return START; }
 "\xE2\x96\xB6"                  { output_token(RUN, "RUN", yytext); col_num += 1; return RUN; }
 

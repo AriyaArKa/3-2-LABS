@@ -1,0 +1,30 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\condition.emoji
+# Format: TOKEN_TYPE LEXEME
+
+<START, ▶️>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, x>
+<ASSIGN, =>
+<NUMBER, 10>
+<SEMI, ;>
+<IF, 🤔>
+<LPAREN, (>
+<ID, 📛>
+<IDENTIFIER, x>
+<GT, 🔼>
+<NUMBER, 5>
+<RPAREN, )>
+<LBRACE, {>
+<OUTPUT, 📤>
+<STRING, "x is greater than 5">
+<SEMI, ;>
+<RBRACE, }>
+<ELSE, 🔁❓>
+<LBRACE, {>
+<OUTPUT, 📤>
+<STRING, "x is not greater than 5">
+<SEMI, ;>
+<RBRACE, }>
+<END, ⏹️>

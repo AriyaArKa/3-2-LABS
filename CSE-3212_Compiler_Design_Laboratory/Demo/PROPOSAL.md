@@ -110,3 +110,138 @@ It allows developers to describe tasks, variables, sequences, conditions, loops,
 **Total tokens: 45+ ✅**
 
 This version now includes variables (declaration and assignment) and their use in workflows.
+
+---
+
+## 4. Technical Implementation Details
+
+### 4.1 Example Token Definitions
+
+The lexical analyzer uses specific token constants defined in the C header section:
+
+```c
+#define START       256
+#define END         257
+#define BLOCK       258
+#define SEMI        259
+#define TASK        260
+#define RUN         261
+#define WAIT        262
+#define LOOP        263
+#define STOP        264
+#define RETRY       265
+#define IF          266
+#define ELSE        267
+#define AND         268
+#define OR          269
+#define NOT         270
+// ... more tokens up to 45+
+```
+
+Each token represents a unique program element, starting from 256 to avoid conflicts with ASCII characters.
+
+### 4.2 UTF-8 Macro Definitions
+
+Since emojis are multi-byte UTF-8 characters, we define UTF-8 byte patterns:
+
+```c
+UTF8_CONT   [\x80-\xBF]           // Continuation bytes
+UTF8_2BYTE  [\xC2-\xDF]{UTF8_CONT}    // 2-byte sequences
+UTF8_3BYTE  [\xE0-\xEF]{UTF8_CONT}{2} // 3-byte sequences
+UTF8_4BYTE  [\xF0-\xF4]{UTF8_CONT}{3} // 4-byte sequences
+```
+
+These patterns help Flex recognize the structure of UTF-8 encoded emoji characters.
+
+### 4.3 Understanding a Rule (Example)
+
+Here's how a complete lexer rule works:
+
+```c
+/* START: ▶️ (U+25B6 U+FE0F) */
+"\xE2\x96\xB6\xEF\xB8\x8F"      {
+    output_token(START, "START", yytext);
+    col_num += 2;
+    return START;
+}
+```
+
+**Breakdown:**
+
+- `/* START: ▶️ (U+25B6 U+FE0F) */` - Comment showing emoji and Unicode codepoints
+- `"\xE2\x96\xB6\xEF\xB8\x8F"` - UTF-8 hex byte sequence for ▶️
+- `output_token()` - Function to log and output the token
+- `col_num += 2` - Track column position (emoji takes 2 character positions)
+- `return START` - Return token constant to parser
+
+### 4.4 How Emojis Are Converted to Hex Bytes
+
+The conversion process follows these steps:
+
+**Step 1: Unicode Codepoints**
+
+- ▶️ = U+25B6 (Play Button) + U+FE0F (Variation Selector-16)
+
+**Step 2: UTF-8 Encoding**
+
+- U+25B6 → Binary: `0010 0101 1011 0110`
+- 3-byte UTF-8: `1110xxxx 10xxxxxx 10xxxxxx`
+- Result: `1110**0010** 10**011010** 10**110110**`
+- Hex: `E2 96 B6`
+
+- U+FE0F → UTF-8: `EF B8 8F`
+
+**Step 3: C String Format**
+
+- Combined: `\xE2\x96\xB6\xEF\xB8\x8F`
+
+**Example Conversion Table:**
+| Emoji | Unicode | UTF-8 Bytes | C Pattern |
+|-------|-------------|----------------|------------------------------|
+| ▶️ | U+25B6+FE0F | E2 96 B6 EF B8 8F | `\xE2\x96\xB6\xEF\xB8\x8F` |
+| 🤔 | U+1F914 | F0 9F A4 94 | `\xF0\x9F\xA4\x94` |
+| 📝 | U+1F4DD | F0 9F 93 9D | `\xF0\x9F\x93\x9D` |
+| ⏳ | U+23F3 | E2 8F B3 | `\xE2\x8F\xB3` |
+
+### 4.5 Program Structure Tokens
+
+The EMOJI-FLOW language uses specific structural tokens:
+
+**Control Flow Structure:**
+
+```
+▶️                    // START - Begin program execution
+🧱 {                  // BLOCK - Start code block
+    // ... tasks ...
+}                     // End block
+⏹️                    // END - Terminate program
+```
+
+**Task Definition Structure:**
+
+```
+⚙️ taskName           // TASK - Define a task
+📛 count 🔢 = 5;      // Variable declaration (ID + INT_TYPE + ASSIGN)
+▶ someTask;           // RUN - Execute task
+```
+
+**Conditional Structure:**
+
+```
+🤔 count 🔼 3 {       // IF + variable + GT + value
+    📤 "Greater!";    // OUTPUT + STRING
+} 🔁❓ {              // ELSE
+    📤 "Lesser!";     // OUTPUT + STRING
+}
+```
+
+**Loop Structure:**
+
+```
+🔁 count 🔽 10 {      // LOOP while count < 10
+    📛 count = count + 1;  // Increment counter
+    📝 "Processing...";    // LOG message
+}
+```
+
+This structured approach ensures that EMOJI-FLOW programs maintain clear syntax while leveraging the visual expressiveness of emojis.

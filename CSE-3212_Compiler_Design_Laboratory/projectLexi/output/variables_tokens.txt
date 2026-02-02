@@ -1,0 +1,33 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\variables.emoji
+# Format: TOKEN_TYPE LEXEME
+
+<START, ▶️>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, num>
+<ASSIGN, =>
+<NUMBER, 42>
+<SEMI, ;>
+<STRING_TYPE, 🔤>
+<ID, 📛>
+<IDENTIFIER, name>
+<ASSIGN, =>
+<STRING, "Arka">
+<SEMI, ;>
+<TRUE, 🔥>
+<ID, 📛>
+<IDENTIFIER, flag>
+<ASSIGN, =>
+<TRUE, 🔥>
+<SEMI, ;>
+<OUTPUT, 📤>
+<IDENTIFIER, num>
+<SEMI, ;>
+<OUTPUT, 📤>
+<IDENTIFIER, name>
+<SEMI, ;>
+<OUTPUT, 📤>
+<IDENTIFIER, flag>
+<SEMI, ;>
+<END, ⏹️>

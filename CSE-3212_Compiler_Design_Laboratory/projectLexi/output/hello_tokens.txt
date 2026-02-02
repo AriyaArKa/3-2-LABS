@@ -1,0 +1,12 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\hello.emoji
+# Format: TOKEN_TYPE LEXEME
+
+<START, ▶️>
+<LOG, 📝>
+<STRING, "Hello, World!">
+<SEMI, ;>
+<OUTPUT, 📤>
+<STRING, "Welcome to EMOJI-FLOW!">
+<SEMI, ;>
+<END, ⏹️>
