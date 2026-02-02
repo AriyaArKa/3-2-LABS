@@ -1,0 +1,48 @@
+💬 Advanced Operations Demo
+▶️
+💬 Task and time management
+⚙️ task1 {
+    📝 "Starting task 1";
+    ⏳ 2;
+    📤 "Task 1 completed";
+}
+
+💬 Scheduling operations  
+🕒 task1;
+⏰ "10:30";
+⏭️ task2;
+
+💬 Error handling and retry
+⚙️ risky_task {
+    🤔 (error_condition) {
+        ⚠️ "Error occurred!";
+        ♻️;
+    }
+    📤 "Task successful";
+}
+
+💬 Advanced conditionals with AND/OR
+🔢 📛 a = 10;
+🔢 📛 b = 20;
+🔢 📛 c = 15;
+
+🤔 (📛 a 🔼 5 🤝 📛 b 🔼 15) {
+    📤 "Both conditions are true";
+}
+
+🤔 (📛 c 🔽 10 🔀 📛 c 🔼 25) {
+    📤 "Either condition is true";
+}
+
+💬 Boolean operations
+🔥 📛 is_active = 🔥;
+❄️📛 is_stopped = ❄️;
+
+🤔 (🚫 📛 is_stopped) {
+    📤 "System is running";
+}
+
+💬 Navigation and control
+⏮️;
+🔚 main_process;
+⏹️

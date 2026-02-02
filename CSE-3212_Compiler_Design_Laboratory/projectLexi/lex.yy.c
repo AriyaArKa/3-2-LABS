@@ -2092,14 +2092,13 @@ int main(int argc, char **argv) {
     printf("  Output: %s\n", output_filename);
     printf("==============================================\n\n");
 
-    /* Write header to output file */
+    
     fprintf(output_file, "# EMOJI-FLOW Token Stream\n");
     fprintf(output_file, "# Generated from: %s\n", argv[1]);
     fprintf(output_file, "# Format: TOKEN_TYPE LEXEME\n\n");
 
     yyin = input_file;
     
-    /* Tokenize the input */
     while (yylex());
 
     printf("\n==============================================\n");

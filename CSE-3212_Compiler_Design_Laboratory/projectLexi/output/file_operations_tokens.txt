@@ -1,0 +1,55 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\file_operations.emoji
+# Format: TOKEN_TYPE LEXEME
+
+<START, ▶️>
+<OPEN, 📂>
+<FILE, 🧾>
+<STRING, "data.txt">
+<SEMI, ;>
+<WRITE, ✏️>
+<FILE, 🧾>
+<STRING, "Hello World\n">
+<SEMI, ;>
+<WRITE, ✏️>
+<FILE, 🧾>
+<STRING, "Second line\n">
+<SEMI, ;>
+<CLOSE, 📁>
+<FILE, 🧾>
+<SEMI, ;>
+<OPEN, 📂>
+<FILE, 🧾>
+<STRING, "data.txt">
+<SEMI, ;>
+<READ, 📄>
+<FILE, 🧾>
+<SEMI, ;>
+<CLOSE, 📁>
+<FILE, 🧾>
+<SEMI, ;>
+<OPEN, 📂>
+<FILE, 🧾>
+<STRING, "temp.txt">
+<SEMI, ;>
+<WRITE, ✏️>
+<FILE, 🧾>
+<STRING, "Temporary data">
+<SEMI, ;>
+<CLOSE, 📁>
+<FILE, 🧾>
+<SEMI, ;>
+<DELETE, ❌>
+<FILE, 🧾>
+<STRING, "temp.txt">
+<SEMI, ;>
+<OUTPUT, 📤>
+<STRING, "File operations completed!">
+<SEMI, ;>
+<LOG, 📝>
+<STRING, "File operations log entry">
+<SEMI, ;>
+<ALERT, 🔔>
+<STRING, "Alert: Operations finished">
+<SEMI, ;>
+<END, ⏹️>

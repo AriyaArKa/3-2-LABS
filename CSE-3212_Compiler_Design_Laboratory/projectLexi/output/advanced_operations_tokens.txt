@@ -1,0 +1,126 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\advanced_operations.emoji
+# Format: TOKEN_TYPE LEXEME
+
+<START, ▶️>
+<TASK, ⚙️>
+<IDENTIFIER, task1>
+<LBRACE, {>
+<LOG, 📝>
+<STRING, "Starting task 1">
+<SEMI, ;>
+<WAIT, ⏳>
+<NUMBER, 2>
+<SEMI, ;>
+<OUTPUT, 📤>
+<STRING, "Task 1 completed">
+<SEMI, ;>
+<RBRACE, }>
+<SCHEDULE, 🕒>
+<IDENTIFIER, task1>
+<SEMI, ;>
+<TIME, ⏰>
+<STRING, "10:30">
+<SEMI, ;>
+<NEXT, ⏭️>
+<IDENTIFIER, task2>
+<SEMI, ;>
+<TASK, ⚙️>
+<IDENTIFIER, risky_task>
+<LBRACE, {>
+<IF, 🤔>
+<LPAREN, (>
+<IDENTIFIER, error_condition>
+<RPAREN, )>
+<LBRACE, {>
+<ERROR, ⚠️>
+<STRING, "Error occurred!">
+<SEMI, ;>
+<RETRY, ♻️>
+<SEMI, ;>
+<RBRACE, }>
+<OUTPUT, 📤>
+<STRING, "Task successful">
+<SEMI, ;>
+<RBRACE, }>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, a>
+<ASSIGN, =>
+<NUMBER, 10>
+<SEMI, ;>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, b>
+<ASSIGN, =>
+<NUMBER, 20>
+<SEMI, ;>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, c>
+<ASSIGN, =>
+<NUMBER, 15>
+<SEMI, ;>
+<IF, 🤔>
+<LPAREN, (>
+<ID, 📛>
+<IDENTIFIER, a>
+<GT, 🔼>
+<NUMBER, 5>
+<AND, 🤝>
+<ID, 📛>
+<IDENTIFIER, b>
+<GT, 🔼>
+<NUMBER, 15>
+<RPAREN, )>
+<LBRACE, {>
+<OUTPUT, 📤>
+<STRING, "Both conditions are true">
+<SEMI, ;>
+<RBRACE, }>
+<IF, 🤔>
+<LPAREN, (>
+<ID, 📛>
+<IDENTIFIER, c>
+<LT, 🔽>
+<NUMBER, 10>
+<OR, 🔀>
+<ID, 📛>
+<IDENTIFIER, c>
+<GT, 🔼>
+<NUMBER, 25>
+<RPAREN, )>
+<LBRACE, {>
+<OUTPUT, 📤>
+<STRING, "Either condition is true">
+<SEMI, ;>
+<RBRACE, }>
+<TRUE, 🔥>
+<ID, 📛>
+<IDENTIFIER, is_active>
+<ASSIGN, =>
+<TRUE, 🔥>
+<SEMI, ;>
+<FALSE, ❄️>
+<ID, 📛>
+<IDENTIFIER, is_stopped>
+<ASSIGN, =>
+<FALSE, ❄️>
+<SEMI, ;>
+<IF, 🤔>
+<LPAREN, (>
+<NOT, 🚫>
+<ID, 📛>
+<IDENTIFIER, is_stopped>
+<RPAREN, )>
+<LBRACE, {>
+<OUTPUT, 📤>
+<STRING, "System is running">
+<SEMI, ;>
+<RBRACE, }>
+<PREV, ⏮️>
+<SEMI, ;>
+<STOP, 🔚>
+<IDENTIFIER, main_process>
+<SEMI, ;>
+<END, ⏹️>

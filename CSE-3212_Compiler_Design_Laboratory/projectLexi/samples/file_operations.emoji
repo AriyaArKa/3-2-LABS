@@ -1,0 +1,24 @@
+💬 File Operations Demo
+▶️
+💬 Open and work with files
+📂 🧾 "data.txt";
+✏️ 🧾 "Hello World\n";
+✏️ 🧾 "Second line\n";
+📁 🧾;
+
+💬 Read file operations  
+📂 🧾 "data.txt";
+📄 🧾;
+📁 🧾;
+
+💬 File management
+📂 🧾 "temp.txt";
+✏️ 🧾 "Temporary data";
+📁 🧾;
+❌ 🧾 "temp.txt";
+
+💬 Output operations
+📤 "File operations completed!";
+📝 "File operations log entry";
+🔔 "Alert: Operations finished";
+⏹️
