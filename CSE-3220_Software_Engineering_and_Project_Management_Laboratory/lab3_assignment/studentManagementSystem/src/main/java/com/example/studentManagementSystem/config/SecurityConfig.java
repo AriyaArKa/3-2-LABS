@@ -14,31 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * Spring Security Configuration
- * 
- * ====================================================================
- * AUTHENTICATION vs AUTHORIZATION - Key Concepts
- * ====================================================================
- * 
- * AUTHENTICATION: "Who are you?"
- * - The process of verifying the identity of a user
- * - User provides credentials (username/password)
- * - System validates these credentials against stored data
- * - Example: Logging in with username and password
- * 
- * AUTHORIZATION: "What are you allowed to do?"
- * - The process of determining what actions a user can perform
- * - Happens AFTER authentication
- * - Based on user's role or permissions
- * - Example: Teacher can manage students, but student cannot
- * 
- * In this application:
- * - Authentication: Login with username/password
- * - Authorization: ROLE_TEACHER can access /students/**, /teachers/**, etc.
- *                  ROLE_STUDENT can only access their own profile and courses
- * ====================================================================
- */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
