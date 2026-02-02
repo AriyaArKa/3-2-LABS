@@ -537,7 +537,7 @@ int line_num = 1;
 int col_num = 1;
 FILE *output_file;
 
-/* Function to output token for Bison */
+
 void output_token(int token, const char* token_name, const char* lexeme) {
     fprintf(output_file, "<%s, %s>\n", token_name, lexeme);
     printf("Line %d, Col %d: %-15s -> %s\n", line_num, col_num, lexeme, token_name);
