@@ -1,0 +1,127 @@
+//
+//  ContentView.swift
+//  KnowingUI
+//
+//  Created by macos on 3/1/26.
+//
+
+import SwiftUI
+
+
+struct ContentView: View {
+    @State var clicked: Bool = false
+    
+    
+    var body: some View {
+        
+            VStack {
+                
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.red)
+                
+                
+                Text("Hello, world!")
+                    .padding()
+                    .fontWeight(.bold)
+                 
+                
+                NavigationStack {
+                    VStack {
+                        Image("images")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                        
+                        NavigationLink("Go to Details") {
+                          //  Text("Welcome to the Detail Screen!")
+                            DetailView()
+                        }
+                        
+                        Button {
+                            
+                            clicked.toggle()
+                        } label : {
+                            Text("Go to new page")
+                        }
+                    }
+                    .navigationTitle("My App")
+                    
+                   .navigationDestination(isPresented: $clicked) {
+                       LikeButton()
+                    }
+                
+                
+                     
+                }
+                 
+                
+                Image("images")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                 
+            }
+            
+           
+            
+        }
+        
+        
+       
+        
+    }
+
+/*
+struct DetailView: View {
+    //let count: Int
+    var body: some View {
+        Text("Button clicked times")
+            .font(.title)
+    }
+}
+ 
+
+struct LikeButton: View {
+    
+    @State private var isLiked: Bool = false
+   
+    var body: some View {
+        Button {
+            // 2. The Action: Toggle the boolean (true becomes false, false becomes true)
+            isLiked.toggle()
+        } label: {
+            // 3. The Label: Use logic to change the appearance
+            HStack {
+                Image(systemName: isLiked ? "heart.fill" : "heart")
+                Text(isLiked ? "Liked" : "Like")
+            }
+            .font(.title)
+            .padding()
+            // 4. Change color based on state
+            .foregroundColor(isLiked ? .white : .blue)
+            .background(isLiked ? Color.red : Color.blue.opacity(0.1))
+            .cornerRadius(10)
+        }
+       
+    }
+}
+
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+       
+        VStack{
+            ContentView()
+           // LikeButton()
+            /*
+            Text("This is illusion")
+                .foregroundColor(.red)
+                .background(.gray.opacity(0.2))
+            */
+        }
+    }
+}
