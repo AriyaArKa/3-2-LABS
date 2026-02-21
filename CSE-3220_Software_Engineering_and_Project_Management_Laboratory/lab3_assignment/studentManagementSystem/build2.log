@@ -1,0 +1,391 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.example:studentManagementSystem >-----------------
+[INFO] Building studentManagementSystem 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ studentManagementSystem ---
+[INFO] Deleting D:\3-2\Lab\CSE-3220_Software_Engineering_and_Project_Management_Laboratory\lab3_assignment\studentManagementSystem\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ studentManagementSystem ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 22 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ studentManagementSystem ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 29 source files with javac [debug release 21] to target\classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ studentManagementSystem ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ studentManagementSystem ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 19 source files with javac [debug release 21] to target\test-classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- surefire:3.1.2:test (default-test) @ studentManagementSystem ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.studentManagementSystem.controller.CourseControllerTest
+01:12:05.164 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.studentManagementSystem.controller.CourseControllerTest]: CourseControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:12:05.499 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.controller.CourseControllerTest
+01:12:05.713 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+WARNING: A Java agent has been loaded dynamically (C:\Users\HP\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-02-22T01:12:15.040+06:00  INFO 8528 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-22T01:12:15.046+06:00  INFO 8528 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-22T01:12:15.049+06:00  INFO 8528 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.63 s -- in com.example.studentManagementSystem.controller.CourseControllerTest
+[INFO] Running com.example.studentManagementSystem.controller.DepartmentControllerTest
+2026-02-22T01:12:17.330+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.controller.DepartmentControllerTest]: DepartmentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:17.448+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.controller.DepartmentControllerTest
+2026-02-22T01:12:17.461+06:00  INFO 8528 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-02-22T01:12:19.680+06:00  INFO 8528 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-22T01:12:19.680+06:00  INFO 8528 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-22T01:12:19.682+06:00  INFO 8528 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.913 s -- in com.example.studentManagementSystem.controller.DepartmentControllerTest
+[INFO] Running com.example.studentManagementSystem.controller.HomeControllerTest
+2026-02-22T01:12:20.295+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.controller.HomeControllerTest]: HomeControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:20.356+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.controller.HomeControllerTest
+2026-02-22T01:12:20.369+06:00  INFO 8528 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-02-22T01:12:21.769+06:00  INFO 8528 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-22T01:12:21.770+06:00  INFO 8528 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-22T01:12:21.771+06:00  INFO 8528 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.950 s -- in com.example.studentManagementSystem.controller.HomeControllerTest
+[INFO] Running com.example.studentManagementSystem.entity.CourseTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.example.studentManagementSystem.entity.CourseTest
+[INFO] Running com.example.studentManagementSystem.entity.DepartmentTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.example.studentManagementSystem.entity.DepartmentTest
+[INFO] Running com.example.studentManagementSystem.entity.RoleTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.example.studentManagementSystem.entity.RoleTest
+[INFO] Running com.example.studentManagementSystem.entity.StudentTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.example.studentManagementSystem.entity.StudentTest
+[INFO] Running com.example.studentManagementSystem.entity.TeacherTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in com.example.studentManagementSystem.entity.TeacherTest
+[INFO] Running com.example.studentManagementSystem.entity.UserTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.example.studentManagementSystem.entity.UserTest
+[INFO] Running com.example.studentManagementSystem.repository.CourseRepositoryTest
+2026-02-22T01:12:22.343+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.repository.CourseRepositoryTest]: CourseRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:22.451+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.repository.CourseRepositoryTest
+2026-02-22T01:12:22.456+06:00  INFO 8528 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-02-22T01:12:23.174+06:00  INFO 8528 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-22T01:12:23.407+06:00  INFO 8528 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 180 ms. Found 6 JPA repository interfaces.
+2026-02-22T01:12:23.575+06:00  INFO 8528 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2026-02-22T01:12:23.892+06:00  INFO 8528 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:5bd5bcec-2a69-4eec-8e90-7e6a973c73d6;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2026-02-22T01:12:24.729+06:00  INFO 8528 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-22T01:12:24.938+06:00  INFO 8528 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-02-22T01:12:25.001+06:00  INFO 8528 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-22T01:12:25.218+06:00  INFO 8528 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-22T01:12:27.416+06:00  INFO 8528 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists courses cascade 
+Hibernate: drop table if exists departments cascade 
+Hibernate: drop table if exists roles cascade 
+Hibernate: drop table if exists student_courses cascade 
+Hibernate: drop table if exists students cascade 
+Hibernate: drop table if exists teachers cascade 
+Hibernate: drop table if exists users cascade 
+Hibernate: create table courses (credits integer not null, id bigint generated by default as identity, teacher_id bigint, code varchar(255) not null unique, description varchar(255), name varchar(255) not null, primary key (id))
+Hibernate: create table departments (id bigint generated by default as identity, code varchar(255) not null unique, description varchar(255), name varchar(255) not null unique, primary key (id))
+Hibernate: create table roles (id bigint generated by default as identity, name varchar(255) not null unique, primary key (id))
+Hibernate: create table student_courses (course_id bigint not null, student_id bigint not null, primary key (course_id, student_id))
+Hibernate: create table students (semester integer not null, department_id bigint, id bigint generated by default as identity, user_id bigint unique, address varchar(255), email varchar(255) not null unique, first_name varchar(255) not null, last_name varchar(255) not null, phone varchar(255), student_id varchar(255) not null unique, primary key (id))
+Hibernate: create table teachers (department_id bigint, id bigint generated by default as identity, user_id bigint unique, designation varchar(255), email varchar(255) not null unique, first_name varchar(255) not null, last_name varchar(255) not null, phone varchar(255), qualification varchar(255), primary key (id))
+Hibernate: create table users (enabled boolean not null, id bigint generated by default as identity, role_id bigint not null, email varchar(255) not null, password varchar(255) not null, username varchar(255) not null unique, primary key (id))
+Hibernate: alter table if exists courses add constraint FK468oyt88pgk2a0cxrvxygadqg foreign key (teacher_id) references teachers
+Hibernate: alter table if exists student_courses add constraint FKsfpq78oyrqua1h0obpl7ulc18 foreign key (course_id) references courses
+Hibernate: alter table if exists student_courses add constraint FKwj1l0mta35u161acdl2tupoo foreign key (student_id) references students
+Hibernate: alter table if exists students add constraint FKalgc33nsolpmegw14o3h6g6rr foreign key (department_id) references departments
+Hibernate: alter table if exists students add constraint FKdt1cjx5ve5bdabmuuf3ibrwaq foreign key (user_id) references users
+Hibernate: alter table if exists teachers add constraint FKrgr03njnvpwuktc0mntf8t6o0 foreign key (department_id) references departments
+Hibernate: alter table if exists teachers add constraint FKb8dct7w2j1vl1r2bpstw5isc0 foreign key (user_id) references users
+Hibernate: alter table if exists users add constraint FKp56c1712k691lhsyewcssf40f foreign key (role_id) references roles
+2026-02-22T01:12:27.594+06:00  INFO 8528 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: select c1_0.id,c1_0.code,c1_0.credits,c1_0.description,c1_0.name,c1_0.teacher_id from courses c1_0
+Hibernate: select t1_0.id,t1_0.department_id,t1_0.designation,t1_0.email,t1_0.first_name,t1_0.last_name,t1_0.phone,t1_0.qualification,t1_0.user_id from teachers t1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into teachers (department_id,designation,email,first_name,last_name,phone,qualification,user_id,id) values (?,?,?,?,?,?,?,?,default)
+Hibernate: insert into courses (code,credits,description,name,teacher_id,id) values (?,?,?,?,?,default)
+Hibernate: select c1_0.id,c1_0.code,c1_0.credits,c1_0.description,c1_0.name,c1_0.teacher_id from courses c1_0 where c1_0.code=?
+Hibernate: select c1_0.id,c1_0.code,c1_0.credits,c1_0.description,c1_0.name,c1_0.teacher_id from courses c1_0
+Hibernate: select t1_0.id,t1_0.department_id,t1_0.designation,t1_0.email,t1_0.first_name,t1_0.last_name,t1_0.phone,t1_0.qualification,t1_0.user_id from teachers t1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into teachers (department_id,designation,email,first_name,last_name,phone,qualification,user_id,id) values (?,?,?,?,?,?,?,?,default)
+Hibernate: insert into courses (code,credits,description,name,teacher_id,id) values (?,?,?,?,?,default)
+Hibernate: select c1_0.id,c1_0.code,c1_0.credits,c1_0.description,c1_0.name,c1_0.teacher_id from courses c1_0
+Hibernate: select t1_0.id,t1_0.department_id,t1_0.designation,t1_0.email,t1_0.first_name,t1_0.last_name,t1_0.phone,t1_0.qualification,t1_0.user_id from teachers t1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into teachers (department_id,designation,email,first_name,last_name,phone,qualification,user_id,id) values (?,?,?,?,?,?,?,?,default)
+Hibernate: insert into courses (code,credits,description,name,teacher_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into courses (code,credits,description,name,teacher_id,id) values (?,?,?,?,?,default)
+Hibernate: select c1_0.id,c1_0.code,c1_0.credits,c1_0.description,c1_0.name,c1_0.teacher_id from courses c1_0 left join teachers t1_0 on t1_0.id=c1_0.teacher_id where t1_0.id=?
+Hibernate: select c1_0.id,c1_0.code,c1_0.credits,c1_0.description,c1_0.name,c1_0.teacher_id from courses c1_0
+Hibernate: select t1_0.id,t1_0.department_id,t1_0.designation,t1_0.email,t1_0.first_name,t1_0.last_name,t1_0.phone,t1_0.qualification,t1_0.user_id from teachers t1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into teachers (department_id,designation,email,first_name,last_name,phone,qualification,user_id,id) values (?,?,?,?,?,?,?,?,default)
+Hibernate: insert into courses (code,credits,description,name,teacher_id,id) values (?,?,?,?,?,default)
+Hibernate: select c1_0.id from courses c1_0 where c1_0.code=? fetch first ? rows only
+Hibernate: select c1_0.id from courses c1_0 where c1_0.code=? fetch first ? rows only
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.297 s -- in com.example.studentManagementSystem.repository.CourseRepositoryTest
+[INFO] Running com.example.studentManagementSystem.repository.DepartmentRepositoryTest
+2026-02-22T01:12:29.660+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.repository.DepartmentRepositoryTest]: DepartmentRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:29.683+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.repository.DepartmentRepositoryTest
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0 where d1_0.code=?
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0 where d1_0.name=?
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: select d1_0.id from departments d1_0 where d1_0.code=? fetch first ? rows only
+Hibernate: select d1_0.id from departments d1_0 where d1_0.code=? fetch first ? rows only
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: select d1_0.id from departments d1_0 where d1_0.name=? fetch first ? rows only
+Hibernate: select d1_0.id from departments d1_0 where d1_0.name=? fetch first ? rows only
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.192 s -- in com.example.studentManagementSystem.repository.DepartmentRepositoryTest
+[INFO] Running com.example.studentManagementSystem.repository.RoleRepositoryTest
+2026-02-22T01:12:29.844+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.repository.RoleRepositoryTest]: RoleRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:29.865+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.repository.RoleRepositoryTest
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0 where r1_0.name=?
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: select r1_0.id,r1_0.name from roles r1_0 where r1_0.name=?
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: select r1_0.id from roles r1_0 where r1_0.name=? fetch first ? rows only
+Hibernate: select r1_0.id from roles r1_0 where r1_0.name=? fetch first ? rows only
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s -- in com.example.studentManagementSystem.repository.RoleRepositoryTest
+[INFO] Running com.example.studentManagementSystem.repository.StudentRepositoryTest
+2026-02-22T01:12:29.944+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.repository.StudentRepositoryTest]: StudentRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:29.965+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.repository.StudentRepositoryTest
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0 left join users u1_0 on u1_0.id=s1_0.user_id where u1_0.id=?
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: select s1_0.id from students s1_0 where s1_0.student_id=? fetch first ? rows only
+Hibernate: select s1_0.id from students s1_0 where s1_0.student_id=? fetch first ? rows only
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0 where s1_0.student_id=?
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0 left join departments d1_0 on d1_0.id=s1_0.department_id where d1_0.id=?
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0 where s1_0.email=?
+Hibernate: select s1_0.id,s1_0.address,s1_0.department_id,s1_0.email,s1_0.first_name,s1_0.last_name,s1_0.phone,s1_0.semester,s1_0.student_id,s1_0.user_id from students s1_0
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select d1_0.id,d1_0.code,d1_0.description,d1_0.name from departments d1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into departments (code,description,name,id) values (?,?,?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: insert into students (address,department_id,email,first_name,last_name,phone,semester,student_id,user_id,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: select s1_0.id from students s1_0 where s1_0.email=? fetch first ? rows only
+Hibernate: select s1_0.id from students s1_0 where s1_0.email=? fetch first ? rows only
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.281 s -- in com.example.studentManagementSystem.repository.StudentRepositoryTest
+[INFO] Running com.example.studentManagementSystem.repository.UserRepositoryTest
+2026-02-22T01:12:30.228+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.repository.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:30.279+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.repository.UserRepositoryTest
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: select u1_0.id from users u1_0 where u1_0.username=? fetch first ? rows only
+Hibernate: select u1_0.id from users u1_0 where u1_0.username=? fetch first ? rows only
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0 where u1_0.email=?
+Hibernate: select u1_0.id,u1_0.email,u1_0.enabled,u1_0.password,u1_0.role_id,u1_0.username from users u1_0
+Hibernate: select r1_0.id,r1_0.name from roles r1_0
+Hibernate: insert into roles (name,id) values (?,default)
+Hibernate: insert into users (email,enabled,password,role_id,username,id) values (?,?,?,?,?,default)
+Hibernate: select u1_0.id from users u1_0 where u1_0.email=? fetch first ? rows only
+Hibernate: select u1_0.id from users u1_0 where u1_0.email=? fetch first ? rows only
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.271 s -- in com.example.studentManagementSystem.repository.UserRepositoryTest
+[INFO] Running com.example.studentManagementSystem.service.CourseServiceTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.535 s -- in com.example.studentManagementSystem.service.CourseServiceTest
+[INFO] Running com.example.studentManagementSystem.service.DepartmentServiceTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.177 s -- in com.example.studentManagementSystem.service.DepartmentServiceTest
+[INFO] Running com.example.studentManagementSystem.service.StudentServiceTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.783 s -- in com.example.studentManagementSystem.service.StudentServiceTest
+[INFO] Running com.example.studentManagementSystem.service.TeacherServiceTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s -- in com.example.studentManagementSystem.service.TeacherServiceTest
+[INFO] Running com.example.studentManagementSystem.StudentManagementSystemApplicationTests
+2026-02-22T01:12:32.106+06:00  INFO 8528 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studentManagementSystem.StudentManagementSystemApplicationTests]: StudentManagementSystemApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-22T01:12:32.121+06:00  INFO 8528 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studentManagementSystem.StudentManagementSystemApplication for test class com.example.studentManagementSystem.StudentManagementSystemApplicationTests
+2026-02-22T01:12:32.142+06:00  INFO 8528 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-02-22T01:12:32.843+06:00  INFO 8528 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-22T01:12:32.895+06:00  INFO 8528 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 6 JPA repository interfaces.
+2026-02-22T01:12:33.502+06:00  INFO 8528 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-22T01:12:33.506+06:00  INFO 8528 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-22T01:12:33.536+06:00  INFO 8528 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-22T01:12:33.544+06:00  INFO 8528 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-22T01:12:33.601+06:00  INFO 8528 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn30: url=jdbc:h2:mem:testdb user=SA
+2026-02-22T01:12:33.603+06:00  INFO 8528 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-22T01:12:34.158+06:00  INFO 8528 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-22T01:12:34.226+06:00  INFO 8528 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-22T01:12:35.003+06:00  WARN 8528 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+===========================================
+DATABASE STATUS CHECK
+===========================================
+Roles in database: 0
+Students in database: 0
+Teachers in database: 0
+===========================================
+Database is empty. Initializing with demo data...
+===========================================
+Sample data initialized successfully!
+===========================================
+Teacher Accounts:
+  Username: teacher1, Password: teacher123
+  Username: teacher2, Password: teacher123
+-------------------------------------------
+Student Accounts:
+  Username: student1, Password: student123
+  Username: student2, Password: student123
+  Username: student3, Password: student123
+===========================================
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.098 s -- in com.example.studentManagementSystem.StudentManagementSystemApplicationTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 120, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  58.565 s
+[INFO] Finished at: 2026-02-22T01:12:38+06:00
+[INFO] ------------------------------------------------------------------------

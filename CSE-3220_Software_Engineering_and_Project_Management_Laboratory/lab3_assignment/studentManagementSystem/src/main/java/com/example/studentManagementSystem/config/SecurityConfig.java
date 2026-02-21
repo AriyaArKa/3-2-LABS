@@ -35,7 +35,8 @@ public class SecurityConfig {
      */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -62,10 +63,17 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Public endpoints - accessible by everyone
                 .requestMatchers("/", "/login", "/about", "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
                 
                 // Student-only endpoints
                 .requestMatchers("/students/profile", "/students/my-courses", "/students/my-department").hasRole("STUDENT")
                 .requestMatchers("/students/enroll/**", "/students/drop/**").hasRole("STUDENT")
+                
+                // View-only endpoints accessible by both roles
+                .requestMatchers("/courses", "/courses/view/**").hasAnyRole("STUDENT", "TEACHER")
+                .requestMatchers("/departments", "/departments/view/**").hasAnyRole("STUDENT", "TEACHER")
+                .requestMatchers("/students", "/students/view/**").hasAnyRole("STUDENT", "TEACHER")
+                .requestMatchers("/teachers", "/teachers/view/**").hasAnyRole("STUDENT", "TEACHER")
                 
                 // Teacher-only endpoints - CRUD operations
                 .requestMatchers("/students/**").hasRole("TEACHER")
@@ -102,6 +110,9 @@ public class SecurityConfig {
             .exceptionHandling(ex -> ex
                 .accessDeniedPage("/access-denied")
             )
+            
+            // Allow H2 console frames
+            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             
             // Set authentication provider
             .authenticationProvider(authenticationProvider());
