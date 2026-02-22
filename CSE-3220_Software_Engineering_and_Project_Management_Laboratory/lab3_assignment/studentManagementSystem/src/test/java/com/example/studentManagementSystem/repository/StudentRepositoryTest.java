@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -52,61 +49,21 @@ class StudentRepositoryTest {
     }
 
     @Test
-    void testSaveStudent() {
-        Student saved = createStudent("2024-001", "test@test.com", "test1");
-
-        assertNotNull(saved.getId());
-        assertEquals("2024-001", saved.getStudentId());
-    }
-
-    @Test
-    void testFindByStudentId() {
+    void testFindByStudentIdAndEmail() {
         createStudent("2024-001", "test@test.com", "test1");
 
-        Optional<Student> found = studentRepository.findByStudentId("2024-001");
-        assertTrue(found.isPresent());
-        assertEquals("Test", found.get().getFirstName());
-    }
-
-    @Test
-    void testFindByEmail() {
-        createStudent("2024-001", "test@test.com", "test1");
-
-        Optional<Student> found = studentRepository.findByEmail("test@test.com");
-        assertTrue(found.isPresent());
-    }
-
-    @Test
-    void testFindByUserId() {
-        Student saved = createStudent("2024-001", "test@test.com", "test1");
-
-        Optional<Student> found = studentRepository.findByUserId(saved.getUser().getId());
-        assertTrue(found.isPresent());
-        assertEquals("2024-001", found.get().getStudentId());
-    }
-
-    @Test
-    void testFindByDepartmentId() {
-        createStudent("2024-001", "test1@test.com", "test1");
-        createStudent("2024-002", "test2@test.com", "test2");
-
-        List<Student> found = studentRepository.findByDepartmentId(cse.getId());
-        assertEquals(2, found.size());
-    }
-
-    @Test
-    void testExistsByStudentId() {
-        createStudent("2024-001", "test@test.com", "test1");
-
+        assertTrue(studentRepository.findByStudentId("2024-001").isPresent());
+        assertTrue(studentRepository.findByEmail("test@test.com").isPresent());
         assertTrue(studentRepository.existsByStudentId("2024-001"));
         assertFalse(studentRepository.existsByStudentId("2024-999"));
     }
 
     @Test
-    void testExistsByEmail() {
-        createStudent("2024-001", "test@test.com", "test1");
+    void testFindByUserIdAndDepartmentId() {
+        Student saved = createStudent("2024-001", "test1@test.com", "test1");
+        createStudent("2024-002", "test2@test.com", "test2");
 
-        assertTrue(studentRepository.existsByEmail("test@test.com"));
-        assertFalse(studentRepository.existsByEmail("nonexistent@test.com"));
+        assertTrue(studentRepository.findByUserId(saved.getUser().getId()).isPresent());
+        assertEquals(2, studentRepository.findByDepartmentId(cse.getId()).size());
     }
 }

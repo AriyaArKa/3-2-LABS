@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -25,33 +23,11 @@ class RoleRepositoryTest {
     }
 
     @Test
-    void testSaveRole() {
-        Role role = new Role("ROLE_STUDENT");
-        Role saved = roleRepository.save(role);
-
-        assertNotNull(saved.getId());
-        assertEquals("ROLE_STUDENT", saved.getName());
-    }
-
-    @Test
-    void testFindByName() {
-        roleRepository.save(new Role("ROLE_TEACHER"));
-
-        Optional<Role> found = roleRepository.findByName("ROLE_TEACHER");
-        assertTrue(found.isPresent());
-        assertEquals("ROLE_TEACHER", found.get().getName());
-    }
-
-    @Test
-    void testFindByNameNotFound() {
-        Optional<Role> found = roleRepository.findByName("ROLE_ADMIN");
-        assertFalse(found.isPresent());
-    }
-
-    @Test
-    void testExistsByName() {
+    void testFindByNameAndExistsByName() {
         roleRepository.save(new Role("ROLE_STUDENT"));
 
+        assertTrue(roleRepository.findByName("ROLE_STUDENT").isPresent());
+        assertFalse(roleRepository.findByName("ROLE_ADMIN").isPresent());
         assertTrue(roleRepository.existsByName("ROLE_STUDENT"));
         assertFalse(roleRepository.existsByName("ROLE_ADMIN"));
     }

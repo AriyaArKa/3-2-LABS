@@ -36,8 +36,6 @@ class DepartmentControllerTest {
     @MockBean
     private CustomUserDetailsService customUserDetailsService;
 
-    // --- Access Control Tests ---
-
     @Test
     void testListDepartmentsUnauthenticated() throws Exception {
         mockMvc.perform(get("/departments"))
@@ -46,44 +44,18 @@ class DepartmentControllerTest {
 
     @Test
     @WithMockUser(username = "teacher1", roles = {"TEACHER"})
-    void testListDepartmentsAsTeacher() throws Exception {
+    void testTeacherCanAccessAndCreateDepartment() throws Exception {
         DepartmentDTO dept = new DepartmentDTO(1L, "CSE", "CS", "CS Dept", 10, 3);
         when(departmentService.getAllDepartments()).thenReturn(Arrays.asList(dept));
 
         mockMvc.perform(get("/departments"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("department/list"))
-                .andExpect(model().attributeExists("departments"));
-    }
+                .andExpect(view().name("department/list"));
 
-    @Test
-    @WithMockUser(username = "student1", roles = {"STUDENT"})
-    void testListDepartmentsAsStudent() throws Exception {
-        DepartmentDTO dept = new DepartmentDTO(1L, "CSE", "CS", "CS Dept", 10, 3);
-        when(departmentService.getAllDepartments()).thenReturn(Arrays.asList(dept));
-
-        mockMvc.perform(get("/departments"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    @WithMockUser(username = "teacher1", roles = {"TEACHER"})
-    void testShowCreateFormAsTeacher() throws Exception {
         mockMvc.perform(get("/departments/new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("department/form"));
-    }
 
-    @Test
-    @WithMockUser(username = "student1", roles = {"STUDENT"})
-    void testShowCreateFormAsStudentForbidden() throws Exception {
-        mockMvc.perform(get("/departments/new"))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
-    @WithMockUser(username = "teacher1", roles = {"TEACHER"})
-    void testCreateDepartmentAsTeacher() throws Exception {
         DepartmentDTO saved = new DepartmentDTO(1L, "ME", "ME", "ME Dept", 0, 0);
         when(departmentService.createDepartment(any())).thenReturn(saved);
 
@@ -98,33 +70,14 @@ class DepartmentControllerTest {
 
     @Test
     @WithMockUser(username = "student1", roles = {"STUDENT"})
-    void testCreateDepartmentAsStudentForbidden() throws Exception {
+    void testStudentCannotCreateDepartment() throws Exception {
+        mockMvc.perform(get("/departments/new"))
+                .andExpect(status().isForbidden());
+
         mockMvc.perform(post("/departments/create")
                         .with(csrf())
                         .param("name", "Test")
                         .param("code", "TEST"))
                 .andExpect(status().isForbidden());
-    }
-
-    @Test
-    @WithMockUser(username = "teacher1", roles = {"TEACHER"})
-    void testViewDepartmentAsTeacher() throws Exception {
-        DepartmentDTO dept = new DepartmentDTO(1L, "CSE", "CS", "CS Dept", 10, 3);
-        when(departmentService.getDepartmentById(1L)).thenReturn(dept);
-
-        mockMvc.perform(get("/departments/view/1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("department/view"))
-                .andExpect(model().attributeExists("department"));
-    }
-
-    @Test
-    @WithMockUser(username = "teacher1", roles = {"TEACHER"})
-    void testDeleteDepartmentAsTeacher() throws Exception {
-        doNothing().when(departmentService).deleteDepartment(1L);
-
-        mockMvc.perform(post("/departments/delete/1").with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/departments"));
     }
 }

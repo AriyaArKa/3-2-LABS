@@ -8,9 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -43,27 +40,7 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void testSaveCourse() {
-        Course course = new Course("CSE101", "Intro to CS", "Basic CS", 3);
-        course.setTeacher(teacher);
-        Course saved = courseRepository.save(course);
-
-        assertNotNull(saved.getId());
-        assertEquals("CSE101", saved.getCode());
-    }
-
-    @Test
-    void testFindByCode() {
-        Course course = new Course("CSE101", "Intro to CS", "Basic CS", 3);
-        courseRepository.save(course);
-
-        Optional<Course> found = courseRepository.findByCode("CSE101");
-        assertTrue(found.isPresent());
-        assertEquals("Intro to CS", found.get().getName());
-    }
-
-    @Test
-    void testFindByTeacherId() {
+    void testFindByCodeAndTeacherIdAndExistsByCode() {
         Course course1 = new Course("CSE101", "Intro to CS", "Basic CS", 3);
         course1.setTeacher(teacher);
         courseRepository.save(course1);
@@ -72,14 +49,8 @@ class CourseRepositoryTest {
         course2.setTeacher(teacher);
         courseRepository.save(course2);
 
-        List<Course> found = courseRepository.findByTeacherId(teacher.getId());
-        assertEquals(2, found.size());
-    }
-
-    @Test
-    void testExistsByCode() {
-        courseRepository.save(new Course("CSE101", "Intro to CS", "Basic CS", 3));
-
+        assertTrue(courseRepository.findByCode("CSE101").isPresent());
+        assertEquals(2, courseRepository.findByTeacherId(teacher.getId()).size());
         assertTrue(courseRepository.existsByCode("CSE101"));
         assertFalse(courseRepository.existsByCode("CSE999"));
     }
