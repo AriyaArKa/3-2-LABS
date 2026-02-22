@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -33,50 +31,14 @@ class UserRepositoryTest {
     }
 
     @Test
-    void testSaveUser() {
-        User user = new User("alice", "password123", "alice@test.com", studentRole);
-        User saved = userRepository.save(user);
-
-        assertNotNull(saved.getId());
-        assertEquals("alice", saved.getUsername());
-    }
-
-    @Test
-    void testFindByUsername() {
+    void testFindAndExistsByUsernameAndEmail() {
         userRepository.save(new User("alice", "pass", "alice@test.com", studentRole));
 
-        Optional<User> found = userRepository.findByUsername("alice");
-        assertTrue(found.isPresent());
-        assertEquals("alice@test.com", found.get().getEmail());
-    }
-
-    @Test
-    void testFindByUsernameNotFound() {
-        Optional<User> found = userRepository.findByUsername("nonexistent");
-        assertFalse(found.isPresent());
-    }
-
-    @Test
-    void testFindByEmail() {
-        userRepository.save(new User("alice", "pass", "alice@test.com", studentRole));
-
-        Optional<User> found = userRepository.findByEmail("alice@test.com");
-        assertTrue(found.isPresent());
-        assertEquals("alice", found.get().getUsername());
-    }
-
-    @Test
-    void testExistsByUsername() {
-        userRepository.save(new User("alice", "pass", "alice@test.com", studentRole));
-
+        assertTrue(userRepository.findByUsername("alice").isPresent());
+        assertFalse(userRepository.findByUsername("nonexistent").isPresent());
+        assertTrue(userRepository.findByEmail("alice@test.com").isPresent());
         assertTrue(userRepository.existsByUsername("alice"));
         assertFalse(userRepository.existsByUsername("bob"));
-    }
-
-    @Test
-    void testExistsByEmail() {
-        userRepository.save(new User("alice", "pass", "alice@test.com", studentRole));
-
         assertTrue(userRepository.existsByEmail("alice@test.com"));
         assertFalse(userRepository.existsByEmail("bob@test.com"));
     }

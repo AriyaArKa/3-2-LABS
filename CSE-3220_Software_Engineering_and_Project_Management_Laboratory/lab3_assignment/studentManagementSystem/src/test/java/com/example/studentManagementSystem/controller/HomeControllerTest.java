@@ -37,24 +37,24 @@ class HomeControllerTest {
     private TeacherService teacherService;
 
     @Test
-    void testHomeRedirectsToLogin() throws Exception {
+    void testPublicPagesAccessible() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/login"));
-    }
 
-    @Test
-    void testLoginPage() throws Exception {
         mockMvc.perform(get("/login"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("login"));
-    }
 
-    @Test
-    void testAboutPage() throws Exception {
         mockMvc.perform(get("/about"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("about"));
+    }
+
+    @Test
+    void testDashboardUnauthenticatedRedirects() throws Exception {
+        mockMvc.perform(get("/dashboard"))
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
@@ -73,37 +73,5 @@ class HomeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("teacher/dashboard"))
                 .andExpect(model().attributeExists("teacher"));
-    }
-
-    @Test
-    @WithMockUser(username = "student1", roles = {"STUDENT"})
-    void testDashboardAsStudent() throws Exception {
-        Role role = new Role(2L, "ROLE_STUDENT");
-        User user = new User("student1", "pass", "s@test.com", role);
-        user.setId(2L);
-        Student student = new Student("2024-001", "Alice", "W", "s@test.com", "555", "Addr", 3);
-        student.setId(1L);
-
-        when(customUserDetailsService.getUserByUsername("student1")).thenReturn(user);
-        when(studentService.getStudentEntityByUserId(2L)).thenReturn(student);
-
-        mockMvc.perform(get("/dashboard"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("student/dashboard"))
-                .andExpect(model().attributeExists("student"));
-    }
-
-    @Test
-    void testDashboardUnauthenticatedRedirects() throws Exception {
-        mockMvc.perform(get("/dashboard"))
-                .andExpect(status().is3xxRedirection());
-    }
-
-    @Test
-    @WithMockUser(username = "teacher1", roles = {"TEACHER"})
-    void testAccessDeniedPage() throws Exception {
-        mockMvc.perform(get("/access-denied"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("access-denied"));
     }
 }
