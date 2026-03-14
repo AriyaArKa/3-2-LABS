@@ -7,6 +7,11 @@
     📤 "Task 1 completed";
 }
 
+⚙️ task2 {
+    📝 "Running task 2";
+    📤 "Task 2 completed";
+}
+
 💬 Scheduling operations  
 🕒 task1;
 ⏰ "10:30";

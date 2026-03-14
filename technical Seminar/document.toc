@@ -1,0 +1,3 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{}%
+\contentsline {subsection}{\numberline {1.1}Departments}{1}{}%
+\contentsline {subsection}{\numberline {1.2}Architecture}{2}{}%

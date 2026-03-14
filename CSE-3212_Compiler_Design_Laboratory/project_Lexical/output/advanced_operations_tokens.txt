@@ -1,6 +1,6 @@
 # EMOJI-FLOW Token Stream
-# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\advanced_operations.emoji
-# Format: TOKEN_TYPE LEXEME
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\advanced_operations.emoji
+# Format: <TOKEN_TYPE, LEXEME>
 
 <START, ▶️>
 <TASK, ⚙️>
@@ -14,6 +14,16 @@
 <SEMI, ;>
 <OUTPUT, 📤>
 <STRING, "Task 1 completed">
+<SEMI, ;>
+<RBRACE, }>
+<TASK, ⚙️>
+<IDENTIFIER, task2>
+<LBRACE, {>
+<LOG, 📝>
+<STRING, "Running task 2">
+<SEMI, ;>
+<OUTPUT, 📤>
+<STRING, "Task 2 completed">
 <SEMI, ;>
 <RBRACE, }>
 <SCHEDULE, 🕒>
@@ -124,3 +134,5 @@
 <IDENTIFIER, main_process>
 <SEMI, ;>
 <END, ⏹️>
+
+# Parse result: SUCCESS

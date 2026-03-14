@@ -3,61 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/* Token definitions for Bison compatibility */
-#define START       256
-#define END         257
-#define BLOCK       258
-#define SEMI        259
-#define TASK        260
-#define RUN         261
-#define WAIT        262
-#define LOOP        263
-#define STOP        264
-#define RETRY       265
-#define IF          266
-#define ELSE        267
-#define AND         268
-#define OR          269
-#define NOT         270
-#define GT          271
-#define LT          272
-#define EQ          273
-#define INPUT       274
-#define OUTPUT      275
-#define LOG         276
-#define ALERT       277
-#define OPEN        278
-#define CLOSE       279
-#define FILE_TOK    280
-#define DELETE      281
-#define WRITE       282
-#define READ        283
-#define TIME        284
-#define SCHEDULE    285
-#define NEXT        286
-#define PREV        287
-#define ID          288
-#define INT_TYPE    289
-#define STRING_TYPE 290
-#define TRUE_VAL    291
-#define FALSE_VAL   292
-#define ASSIGN      293
-#define ERROR_TOK   294
-#define NUMBER      295
-#define STRING_LIT  296
-#define IDENTIFIER  297
-#define LPAREN      298
-#define RPAREN      299
-#define LBRACE      300
-#define RBRACE      301
-#define COMMA       302
-#define PLUS        303
-#define MINUS       304
-#define MULTIPLY    305
-#define DIVIDE      306
-#define COLON       307
-#define NEWLINE     308
+#include "emoji_flow.tab.h"
 
 int line_num = 1;
 int col_num = 1;
@@ -234,13 +180,43 @@ UTF8_4BYTE  [\xF0-\xF4]{UTF8_CONT}{3}
 "="                             { output_token(ASSIGN, "ASSIGN", yytext); col_num += 1; return ASSIGN; }
 
     /* Numbers */
-[0-9]+                          { output_token(NUMBER, "NUMBER", yytext); col_num += yyleng; return NUMBER; }
+[0-9]+                          {
+                                    yylval.ival = atoi(yytext);
+                                    output_token(NUMBER, "NUMBER", yytext);
+                                    col_num += yyleng;
+                                    return NUMBER;
+                                }
+
 
     /* String literals */
-\"[^\"]*\"                      { output_token(STRING_LIT, "STRING", yytext); col_num += yyleng; return STRING_LIT; }
+\"[^\"]*\"                      {
+                                    int len = yyleng;
+                                    char *stripped = (char *)malloc((size_t)len - 1);
+                                    if (!stripped) {
+                                        fprintf(stderr, "Out of memory while tokenizing string literal\n");
+                                        exit(1);
+                                    }
+                                    memcpy(stripped, yytext + 1, (size_t)len - 2);
+                                    stripped[len - 2] = '\0';
+                                    yylval.sval = stripped;
+                                    output_token(STRING_LIT, "STRING", yytext);
+                                    col_num += yyleng;
+                                    return STRING_LIT;
+                                }
 
     /* Identifiers (alphanumeric after emoji markers) */
-[a-zA-Z_][a-zA-Z0-9_]*          { output_token(IDENTIFIER, "IDENTIFIER", yytext); col_num += yyleng; return IDENTIFIER; }
+[a-zA-Z_][a-zA-Z0-9_]*          {
+                                    size_t len = strlen(yytext);
+                                    yylval.sval = (char *)malloc(len + 1);
+                                    if (!yylval.sval) {
+                                        fprintf(stderr, "Out of memory while tokenizing identifier\n");
+                                        exit(1);
+                                    }
+                                    memcpy(yylval.sval, yytext, len + 1);
+                                    output_token(IDENTIFIER, "IDENTIFIER", yytext);
+                                    col_num += yyleng;
+                                    return IDENTIFIER;
+                                }
 
     /* Whitespace handling */
 [ \t]+                          { col_num += yyleng; /* Skip whitespace */ }
@@ -259,51 +235,4 @@ UTF8_4BYTE  [\xF0-\xF4]{UTF8_CONT}{3}
 
 %%
 
-int main(int argc, char **argv) {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s <input_file> [output_file]\n", argv[0]);
-        fprintf(stderr, "  input_file  : EMOJI-FLOW source file (.emoji or .ef)\n");
-        fprintf(stderr, "  output_file : Token output file (default: tokens.txt)\n");
-        return 1;
-    }
-
-    FILE *input_file = fopen(argv[1], "r");
-    if (!input_file) {
-        fprintf(stderr, "Error: Cannot open input file '%s'\n", argv[1]);
-        return 1;
-    }
-
-    const char *output_filename = (argc >= 3) ? argv[2] : "tokens.txt";
-    output_file = fopen(output_filename, "w");
-    if (!output_file) {
-        fprintf(stderr, "Error: Cannot create output file '%s'\n", output_filename);
-        fclose(input_file);
-        return 1;
-    }
-
-    printf("==============================================\n");
-    printf("  EMOJI-FLOW Lexical Analyzer v1.0\n");
-    printf("  Input:  %s\n", argv[1]);
-    printf("  Output: %s\n", output_filename);
-    printf("==============================================\n\n");
-
-    
-    fprintf(output_file, "# EMOJI-FLOW Token Stream\n");
-    fprintf(output_file, "# Generated from: %s\n", argv[1]);
-    fprintf(output_file, "# Format: TOKEN_TYPE LEXEME\n\n");
-
-    yyin = input_file;
-    
-    while (yylex());
-
-    printf("\n==============================================\n");
-    printf("  Lexical analysis complete!\n");
-    printf("  Total lines processed: %d\n", line_num);
-    printf("  Output written to: %s\n", output_filename);
-    printf("==============================================\n");
-
-    fclose(input_file);
-    fclose(output_file);
-
-    return 0;
-}
+/* Main is provided by emoji_flow.y so Bison controls the full pipeline. */

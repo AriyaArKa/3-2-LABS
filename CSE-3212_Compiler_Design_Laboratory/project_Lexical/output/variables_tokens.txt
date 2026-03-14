@@ -1,6 +1,6 @@
 # EMOJI-FLOW Token Stream
-# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\projectLexi\samples\variables.emoji
-# Format: TOKEN_TYPE LEXEME
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\variables.emoji
+# Format: <TOKEN_TYPE, LEXEME>
 
 <START, ▶️>
 <INT_TYPE, 🔢>
@@ -31,3 +31,5 @@
 <IDENTIFIER, flag>
 <SEMI, ;>
 <END, ⏹️>
+
+# Parse result: SUCCESS

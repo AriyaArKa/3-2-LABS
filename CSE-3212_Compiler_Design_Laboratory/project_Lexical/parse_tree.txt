@@ -1,0 +1,33 @@
+# EMOJI-FLOW Parse Tree
+# Input: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\variables.emoji
+
+PROGRAM
+  A:
+    BLOCK
+      A:
+        DECL(INT)
+          A:
+            VAR(num)
+          B:
+            INT
+              value=42
+        DECL(STRING)
+          A:
+            VAR(name)
+          B:
+            STRING(Arka)
+        DECL(BOOL)
+          A:
+            VAR(flag)
+          B:
+            BOOL
+              value=true
+        OUTPUT
+          A:
+            VAR(num)
+        OUTPUT
+          A:
+            VAR(name)
+        OUTPUT
+          A:
+            VAR(flag)
