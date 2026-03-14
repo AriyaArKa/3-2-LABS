@@ -1,0 +1,25 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\semantic_tests\if_condition_not_bool.emoji
+# Format: <TOKEN_TYPE, LEXEME>
+
+<START, ▶️>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, x>
+<ASSIGN, =>
+<NUMBER, 1>
+<SEMI, ;>
+<IF, 🤔>
+<LPAREN, (>
+<IDENTIFIER, x>
+<RPAREN, )>
+<LBRACE, {>
+<OUTPUT, 📤>
+<STRING, "this should fail">
+<SEMI, ;>
+<RBRACE, }>
+<END, ⏹️>
+
+# Parse result: SUCCESS
+
+# Semantic result: FAILED (1 error)

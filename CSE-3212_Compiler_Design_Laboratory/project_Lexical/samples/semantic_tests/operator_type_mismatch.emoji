@@ -1,0 +1,6 @@
+💬 EXPECT_ERROR: operator PLUS requires INT+INT or STRING+STRING
+▶️
+🔥 📛 flag = 🔥;
+🔢 📛 n = 1;
+📤 flag + n;
+⏹️

@@ -1,0 +1,4 @@
+💬 EXPECT_ERROR: call to undefined task 'not_defined_task'
+▶️
+🕒 not_defined_task;
+⏹️

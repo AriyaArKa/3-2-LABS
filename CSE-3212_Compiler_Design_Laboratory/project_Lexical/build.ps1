@@ -80,6 +80,71 @@ function Generate-Output {
     Write-Host "`nOutput generation complete! Check 'output' folder." -ForegroundColor Green
 }
 
+function Run-Semantic-Tests {
+    if (-not (Test-Path $EXECUTABLE)) { Build-Processor }
+
+    $testDir = "samples\semantic_tests"
+    if (-not (Test-Path $testDir)) {
+        Write-Host "Semantic test directory not found: $testDir" -ForegroundColor Red
+        exit 1
+    }
+
+    if (-not (Test-Path "output\semantic_tests")) {
+        New-Item -ItemType Directory -Path "output\semantic_tests" -Force | Out-Null
+    }
+
+    $files = Get-ChildItem "$testDir\*.emoji"
+    if ($files.Count -eq 0) {
+        Write-Host "No semantic test files found in $testDir" -ForegroundColor Yellow
+        return
+    }
+
+    $passed = 0
+    $failed = 0
+
+    Write-Host "Running semantic negative tests (expected to fail)..." -ForegroundColor Yellow
+
+    foreach ($file in $files) {
+        $outputFile = "output\semantic_tests\$($file.BaseName)_tokens.txt"
+        $firstLine = Get-Content $file.FullName -TotalCount 1
+        $expectedFragment = ""
+
+        if ($firstLine -match "EXPECT_ERROR:\s*(.+)$") {
+            $expectedFragment = $Matches[1].Trim()
+        }
+
+        Write-Host "Test: $($file.Name)" -ForegroundColor Cyan
+
+        $runOutput = & ".\$EXECUTABLE" $file.FullName $outputFile 2>&1 | Out-String
+        $exitCode = $LASTEXITCODE
+
+        $exitFail = ($exitCode -ne 0)
+        $normalizedOutput = ($runOutput -replace "\s+", "").ToLowerInvariant()
+        $normalizedExpected = ($expectedFragment -replace "\s+", "").ToLowerInvariant()
+        $containsExpected = ($expectedFragment -eq "" -or $normalizedOutput.Contains($normalizedExpected))
+
+        if ($exitFail -and $containsExpected) {
+            Write-Host "  ✅ PASS (failed as expected)" -ForegroundColor Green
+            $passed++
+        }
+        else {
+            Write-Host "  ❌ FAIL" -ForegroundColor Red
+            if (-not $exitFail) {
+                Write-Host "     Reason: test did not fail (exit code 0)." -ForegroundColor Red
+            }
+            if (-not $containsExpected) {
+                Write-Host "     Reason: expected error fragment not found: '$expectedFragment'" -ForegroundColor Red
+            }
+            $failed++
+        }
+    }
+
+    Write-Host "`nSemantic tests summary: $passed passed, $failed failed." -ForegroundColor Yellow
+    if ($failed -gt 0) {
+        exit 1
+    }
+}
+
 function Clean-Files {
     Write-Host "Cleaning..." -ForegroundColor Yellow
     Remove-Item -Path $PARSER_C, $PARSER_H, $LEXER_C, $EXECUTABLE, "output" -Recurse -Force -ErrorAction SilentlyContinue
@@ -90,6 +155,7 @@ function Clean-Files {
 switch ($Command.ToLower()) {
     "build" { Build-Processor }
     "generate" { Generate-Output }
+    "semantic-tests" { Run-Semantic-Tests }
     "clean" { Clean-Files }
     "all" { Build-Processor; Generate-Output }
     default { 

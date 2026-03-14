@@ -1,0 +1,13 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\semantic_tests\undefined_task_call.emoji
+# Format: <TOKEN_TYPE, LEXEME>
+
+<START, ▶️>
+<SCHEDULE, 🕒>
+<IDENTIFIER, not_defined_task>
+<SEMI, ;>
+<END, ⏹️>
+
+# Parse result: SUCCESS
+
+# Semantic result: FAILED (1 error)

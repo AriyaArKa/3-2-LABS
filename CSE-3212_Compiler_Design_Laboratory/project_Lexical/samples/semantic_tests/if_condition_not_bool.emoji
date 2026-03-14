@@ -1,0 +1,7 @@
+💬 EXPECT_ERROR: IF condition must be BOOL, got INT
+▶️
+🔢 📛 x = 1;
+🤔 (x) {
+    📤 "this should fail";
+}
+⏹️

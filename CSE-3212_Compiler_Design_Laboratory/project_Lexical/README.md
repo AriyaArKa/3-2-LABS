@@ -156,6 +156,12 @@ Regenerate outputs without rebuilding:
 powershell -ExecutionPolicy Bypass -File .\build.ps1 generate
 ```
 
+Run semantic negative test suite (programs expected to fail semantic phase):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\build.ps1 semantic-tests
+```
+
 Clean generated files:
 
 ```powershell
@@ -172,9 +178,39 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1 clean
 4. `output/*_tokens.txt` - token stream + parse/semantic result markers.
 5. `parse_tree.txt` - AST dump for the latest run.
 
+For semantic negative tests:
+
+1. `output/semantic_tests/*_tokens.txt` - token stream output for each failing test input.
+
 ---
 
-## 6) Current Scope
+## 6) Semantic Negative Test Suite
+
+Semantic test inputs are in `samples/semantic_tests/` and are intentionally invalid.
+
+Each file begins with:
+
+```text
+💬 EXPECT_ERROR: <error fragment>
+```
+
+The `semantic-tests` command validates that each test:
+
+1. exits with a non-zero code, and
+2. contains the expected error fragment in program output.
+
+Current negative test cases:
+
+1. `undeclared_variable.emoji` - uses undeclared variable.
+2. `type_mismatch_assignment.emoji` - assigns STRING to INT variable.
+3. `undefined_task_call.emoji` - calls task before definition.
+4. `operator_type_mismatch.emoji` - invalid `BOOL + INT` expression.
+5. `division_by_zero.emoji` - divides by zero.
+6. `if_condition_not_bool.emoji` - INT used as IF condition.
+
+---
+
+## 7) Current Scope
 
 Implemented now:
 

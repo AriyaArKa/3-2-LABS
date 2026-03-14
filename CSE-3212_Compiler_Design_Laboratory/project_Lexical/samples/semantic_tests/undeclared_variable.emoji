@@ -1,0 +1,5 @@
+💬 EXPECT_ERROR: use of undeclared variable 'missingVar'
+▶️
+🔢 📛 a = 5;
+📤 missingVar;
+⏹️

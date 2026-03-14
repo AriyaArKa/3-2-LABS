@@ -1,0 +1,27 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\semantic_tests\division_by_zero.emoji
+# Format: <TOKEN_TYPE, LEXEME>
+
+<START, ▶️>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, x>
+<ASSIGN, =>
+<NUMBER, 10>
+<SEMI, ;>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, y>
+<ASSIGN, =>
+<NUMBER, 0>
+<SEMI, ;>
+<OUTPUT, 📤>
+<IDENTIFIER, x>
+<DIV, />
+<IDENTIFIER, y>
+<SEMI, ;>
+<END, ⏹️>
+
+# Parse result: SUCCESS
+
+# Semantic result: FAILED (1 error)

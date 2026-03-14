@@ -1,0 +1,5 @@
+💬 EXPECT_ERROR: cannot assign value of type STRING to variable 'count'
+▶️
+🔢 📛 count = 10;
+📛 count = "ten";
+⏹️

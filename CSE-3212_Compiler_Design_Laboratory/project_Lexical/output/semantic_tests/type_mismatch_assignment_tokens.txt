@@ -1,0 +1,21 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\semantic_tests\type_mismatch_assignment.emoji
+# Format: <TOKEN_TYPE, LEXEME>
+
+<START, ▶️>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, count>
+<ASSIGN, =>
+<NUMBER, 10>
+<SEMI, ;>
+<ID, 📛>
+<IDENTIFIER, count>
+<ASSIGN, =>
+<STRING, "ten">
+<SEMI, ;>
+<END, ⏹️>
+
+# Parse result: SUCCESS
+
+# Semantic result: FAILED (1 error)

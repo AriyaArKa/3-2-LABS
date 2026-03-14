@@ -1,0 +1,6 @@
+💬 EXPECT_ERROR: division by zero
+▶️
+🔢 📛 x = 10;
+🔢 📛 y = 0;
+📤 x / y;
+⏹️

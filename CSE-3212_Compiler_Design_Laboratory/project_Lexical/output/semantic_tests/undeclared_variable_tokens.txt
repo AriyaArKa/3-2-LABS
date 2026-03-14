@@ -1,0 +1,19 @@
+# EMOJI-FLOW Token Stream
+# Generated from: D:\3-2\Lab\CSE-3212_Compiler_Design_Laboratory\project_Lexical\samples\semantic_tests\undeclared_variable.emoji
+# Format: <TOKEN_TYPE, LEXEME>
+
+<START, ▶️>
+<INT_TYPE, 🔢>
+<ID, 📛>
+<IDENTIFIER, a>
+<ASSIGN, =>
+<NUMBER, 5>
+<SEMI, ;>
+<OUTPUT, 📤>
+<IDENTIFIER, missingVar>
+<SEMI, ;>
+<END, ⏹️>
+
+# Parse result: SUCCESS
+
+# Semantic result: FAILED (1 error)
